@@ -565,9 +565,10 @@
       border-radius: 12px;
       cursor: pointer;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 2px;
-      color: #fff
+      font-size: 20px;
+      letter-spacing: 2.5px;
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(200, 16, 46, .45)
     }
 
     .tutorial-header {
@@ -618,33 +619,11 @@
       overflow: hidden
     }
 
-    .video-thumb iframe {
+    .video-thumb video {
       width: 100%;
       height: 100%;
-      border: none;
-      position: absolute;
-      inset: 0
-    }
-
-    .thumb-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255, 255, 255, .2)
-    }
-
-    .play-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: #fff;
-      padding-left: 4px
+      object-fit: cover;
+      border-radius: 0
     }
 
     .video-info {
@@ -934,8 +913,7 @@
         </div>
         <div class="terms-highlight" style="margin-top:28px">
           <p>✅ Ao aceitar, você confirma que leu e concorda com todas as regras para receber seu bônus de
-            <strong>R$25</strong>.
-          </p>
+            <strong>R$25</strong>.</p>
         </div>
       </div>
     </div>
@@ -947,8 +925,7 @@
     <h2 class="success-title">CADASTRO REALIZADO!</h2>
     <p class="success-sub">Parabéns! Seus dados foram salvos com sucesso.<br><strong style="color:#ff8090">R$25</strong>
       serão liberados após verificação.<br><br>Fique atento ao seu WhatsApp!</p>
-    <button class="btn-ok" onclick="goToCreateAccount()"
-      style="font-size:20px;padding:18px 40px;letter-spacing:2.5px">🚀 CRIAR MINHA CONTA</button>
+    <button class="btn-ok" onclick="goToCreateAccount()">🚀 CRIAR MINHA CONTA</button>
   </div>
 
   <!-- INSTALL BAR -->
@@ -964,14 +941,19 @@
     // ══════════════════════════════════════════
     //  SUPABASE CONFIG
     // ══════════════════════════════════════════
-    const SUPABASE_URL = 'https://xuykymqkoinksmkhljrm.supabase.co';
-    const SUPABASE_ANON = 'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs';
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    var sb = null;
+    try {
+      var SUPABASE_URL = 'https://xuykymqkoinksmkhljrm.supabase.co';
+      var SUPABASE_ANON = 'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs';
+      sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    } catch (e) {
+      console.error('Supabase init error:', e);
+    }
 
     // TABS
     function showPage(id, btn) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active') });
+      document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active') });
       document.getElementById('page-' + id).classList.add('active');
       btn.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -983,30 +965,34 @@
 
     // PHONE MASK
     document.getElementById('whatsapp').addEventListener('input', function (e) {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      var v = e.target.value.replace(/\D/g, '').slice(0, 11);
       if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
       else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d*)$/, '($1) $2-$3');
       else if (v.length > 2) v = v.replace(/^(\d{2})(\d*)$/, '($1) $2');
       e.target.value = v;
     });
 
-    function showAlert(msg, type = 'error') {
-      const el = document.getElementById('sb-alert');
+    function showAlert(msg, type) {
+      type = type || 'error';
+      var el = document.getElementById('sb-alert');
       el.textContent = msg; el.className = 'sb-alert ' + type;
-      setTimeout(() => el.className = 'sb-alert', 5000);
+      setTimeout(function () { el.className = 'sb-alert' }, 5000);
     }
 
     function validate() {
-      let ok = true;
-      [{ id: 'nome', err: 'err-nome', test: v => v.trim().length >= 2 },
-      { id: 'sobrenome', err: 'err-sobrenome', test: v => v.trim().length >= 2 },
-      { id: 'whatsapp', err: 'err-whatsapp', test: v => v.replace(/\D/g, '').length >= 10 },
-      { id: 'pix', err: 'err-pix', test: v => v.trim().length >= 5 }
-      ].forEach(f => {
-        const el = document.getElementById(f.id), er = document.getElementById(f.err);
+      var ok = true;
+      var fields = [
+        { id: 'nome', err: 'err-nome', test: function (v) { return v.trim().length >= 2 } },
+        { id: 'sobrenome', err: 'err-sobrenome', test: function (v) { return v.trim().length >= 2 } },
+        { id: 'whatsapp', err: 'err-whatsapp', test: function (v) { return v.replace(/\D/g, '').length >= 10 } },
+        { id: 'pix', err: 'err-pix', test: function (v) { return v.trim().length >= 5 } }
+      ];
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+        var el = document.getElementById(f.id), er = document.getElementById(f.err);
         if (!f.test(el.value)) { el.classList.add('error'); er.classList.add('show'); ok = false; }
         else { el.classList.remove('error'); er.classList.remove('show'); }
-      });
+      }
       if (!document.getElementById('terms-check').classList.contains('checked')) {
         alert('Você precisa aceitar os Termos de Uso.'); ok = false;
       }
@@ -1018,67 +1004,73 @@
     // ══════════════════════════════════════════
     async function submitForm() {
       if (!validate()) return;
-      const btn = document.getElementById('btn-submit');
+      if (!sb) { showAlert('Erro de conexão. Recarregue a página.'); return; }
+      var btn = document.getElementById('btn-submit');
       btn.classList.add('loading'); btn.disabled = true;
 
-      const { error } = await sb.from('leads').insert([{
-        nome: document.getElementById('nome').value.trim(),
-        sobrenome: document.getElementById('sobrenome').value.trim(),
-        whatsapp: document.getElementById('whatsapp').value.trim(),
-        pix: document.getElementById('pix').value.trim(),
-        status: 'Novo',
-        origem: 'superbet25-pwa',
-      }]);
+      try {
+        var result = await sb.from('leads').insert([{
+          nome: document.getElementById('nome').value.trim(),
+          sobrenome: document.getElementById('sobrenome').value.trim(),
+          whatsapp: document.getElementById('whatsapp').value.trim(),
+          pix: document.getElementById('pix').value.trim(),
+          status: 'Novo',
+          origem: 'superbet25-pwa',
+        }]);
 
-      btn.classList.remove('loading'); btn.disabled = false;
+        btn.classList.remove('loading'); btn.disabled = false;
 
-      if (error) {
-        console.error(error);
+        if (result.error) {
+          console.error(result.error);
+          showAlert('⚠️ Erro ao salvar. Tente novamente.');
+          return;
+        }
+
+        document.getElementById('success-overlay').classList.add('show');
+        ['nome', 'sobrenome', 'whatsapp', 'pix'].forEach(function (id) { document.getElementById(id).value = '' });
+        document.getElementById('terms-check').classList.remove('checked');
+      } catch (e) {
+        btn.classList.remove('loading'); btn.disabled = false;
+        console.error(e);
         showAlert('⚠️ Erro ao salvar. Tente novamente.');
-        return;
       }
-
-      document.getElementById('success-overlay').classList.add('show');
-      ['nome', 'sobrenome', 'whatsapp', 'pix'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('terms-check').classList.remove('checked');
     }
 
     function closeSuccess() { document.getElementById('success-overlay').classList.remove('show'); }
 
-    const SUPERBET_LINK = 'https://wlsuperbet.adsrv.eacdn.com/C.ashx?btag=a_20689b_431c_&affid=662&siteid=20689&adid=431&c=MarcosAntonio';
+    var SUPERBET_LINK = 'https://wlsuperbet.adsrv.eacdn.com/C.ashx?btag=a_20689b_431c_&affid=662&siteid=20689&adid=431&c=MarcosAntonio';
     function goToCreateAccount() {
       window.open(SUPERBET_LINK, '_blank');
       closeSuccess();
     }
 
     // VIDEOS — Tutoriais locais (MP4)
-    const videos = [
+    var videos = [
       { num: 'Tutorial 1', title: 'Como se Cadastrar', desc: 'Aprenda o passo a passo para criar sua conta e garantir o bônus.', src: '1.mp4' },
       { num: 'Tutorial 2', title: 'Como Criar sua Conta na Plataforma', desc: 'Veja como finalizar seu cadastro na Superbet e ativar o bônus.', src: '2.mp4' },
       { num: 'Tutorial 3', title: 'Como Usar seu Bônus de R$25', desc: 'Entenda como utilizar seus R$25 e começar a jogar.', src: '3.mp4' },
     ];
-    document.getElementById('video-list').innerHTML = videos.map((v, i) => `
-  <div class="video-card" id="vcard-${i}">
-    <div class="video-thumb">
-      <video controls playsinline preload="metadata"
-        style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:18px 18px 0 0"
-        src="${v.src}">
-        Seu navegador não suporta vídeos.
-      </video>
-    </div>
-    <div class="video-info">
-      <div class="video-num">${v.num}</div>
-      <div class="video-title-text">${v.title}</div>
-      <div class="video-desc-text">${v.desc}</div>
-    </div>
-  </div>`).join('');
+    var html = '';
+    for (var i = 0; i < videos.length; i++) {
+      var v = videos[i];
+      html += '<div class="video-card">'
+        + '<div class="video-thumb">'
+        + '<video controls playsinline preload="metadata" src="' + v.src + '"></video>'
+        + '</div>'
+        + '<div class="video-info">'
+        + '<div class="video-num">' + v.num + '</div>'
+        + '<div class="video-title-text">' + v.title + '</div>'
+        + '<div class="video-desc-text">' + v.desc + '</div>'
+        + '</div></div>';
+    }
+    document.getElementById('video-list').innerHTML = html;
 
     // PWA INSTALL
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; setTimeout(() => document.getElementById('install-bar').classList.add('show'), 3000); });
-    document.getElementById('btn-install').addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; closeInstall(); });
-    function closeInstall() { document.getElementById('install-bar').style.transform = 'translateY(100%)'; setTimeout(() => document.getElementById('install-bar').classList.remove('show'), 400); }
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => { });
+    var deferredPrompt;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; setTimeout(function () { document.getElementById('install-bar').classList.add('show') }, 3000); });
+    document.getElementById('btn-install').addEventListener('click', async function () { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; closeInstall(); });
+    function closeInstall() { document.getElementById('install-bar').style.transform = 'translateY(100%)'; setTimeout(function () { document.getElementById('install-bar').classList.remove('show') }, 400); }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () { });
   </script>
 </body>
 
