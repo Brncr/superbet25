@@ -1383,14 +1383,7 @@
     }
 
     // Check existing session on page load
-    (function () {
-      var savedUser = sessionStorage.getItem('sb25_user');
-      var savedTs = sessionStorage.getItem('sb25_ts');
-      // Session expires after 8 hours
-      if (savedUser && savedTs && (Date.now() - parseInt(savedTs)) < 8 * 60 * 60 * 1000) {
-        showDashboard(savedUser);
-      }
-    })();
+    // Moved to bottom to ensure SB is initialized
 
     // ══════════════════════════════════════════
     //  SUPABASE CONFIG
@@ -1673,6 +1666,15 @@
         }
       });
     }
+    // ── SESSION CHECK (Must run after SB init) ──
+    (function () {
+      var savedUser = sessionStorage.getItem('sb25_user');
+      var savedTs = sessionStorage.getItem('sb25_ts');
+      // Session expires after 8 hours
+      if (savedUser && savedTs && (Date.now() - parseInt(savedTs)) < 8 * 60 * 60 * 1000) {
+        showDashboard(savedUser);
+      }
+    })();
   </script>
   <style>
     @keyframes shake {
