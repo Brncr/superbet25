@@ -1208,17 +1208,17 @@
         dotsWrap.appendChild(dot);
       }
 
-      function updateDots() {
+      function goToSlide(idx) {
+        current = idx;
+        // FIX: Use container scroll instead of scrollIntoView to prevent page jumping
+        var left = slides[idx].offsetLeft;
+        carousel.scrollTo({ left: left, behavior: 'smooth' });
+
+        // Update dots visual
         var dots = dotsWrap.querySelectorAll('.promo-dot');
         for (var j = 0; j < dots.length; j++) {
           dots[j].classList.toggle('active', j === current);
         }
-      }
-
-      function goToSlide(idx) {
-        current = idx;
-        slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-        updateDots();
       }
 
       // auto-scroll every 4s
