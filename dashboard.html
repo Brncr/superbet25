@@ -1657,6 +1657,15 @@
       wrap.appendChild(el);
       setTimeout(function () { el.classList.add('out'); setTimeout(function () { el.remove(); }, 300); }, 3500);
     }
+
+    // ── FORCE NO-CACHE FOR DASHBOARD ──
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
   </script>
   <style>
     @keyframes shake {
