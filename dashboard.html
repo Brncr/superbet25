@@ -1320,7 +1320,7 @@
 
   <div class="toast-wrap" id="toast-wrap"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/dist/umd/supabase.min.js"></script>
   <script>
     // ══════════════════════════════════════════
     //  AUTH — SHA-256 hashed credentials
@@ -1399,8 +1399,13 @@
     try {
       sb = supabase.createClient(
         'https://xuykymqkoinksmkhljrm.supabase.co',
-        'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs'
+        'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs',
+        {
+          auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+          db: { schema: 'public' }
+        }
       );
+      console.log('✅ Supabase Client Initialized!');
     } catch (e) { console.error('Supabase init error:', e); }
 
     // ── STATE ──
@@ -1422,7 +1427,9 @@
     // ── LOAD LEADS ──
     async function loadLeads() {
       if (!sb) return;
-      var result = await sb.from('leads').select('*').order('created_at', { ascending: false });
+      console.log('🔄 Fetching leads...');
+      var result = await sb.from('leads').select('*').order('created_at', { ascending: false }).limit(100);
+      console.log('📡 Leads fetch result:', result);
       if (result.error) {
         console.error(result.error);
         document.getElementById('table-body').innerHTML =
