@@ -66,8 +66,9 @@
       flex-direction: column
     }
 
+    /* HEADER */
     header {
-      padding: 20px 24px 16px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -79,17 +80,15 @@
       background: rgba(10, 10, 10, .85)
     }
 
-    .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
+    .logo-img {
+      height: 22px;
+      width: auto
+    }
+
+    .logo-badge-wrap {
       display: flex;
       align-items: center;
       gap: 8px
-    }
-
-    .logo span {
-      color: var(--red)
     }
 
     .logo-badge {
@@ -102,24 +101,41 @@
       letter-spacing: 1px
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .header-pill {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 100px;
+      padding: 4px 10px
+    }
+
+    /* TABS */
     .tabs {
       display: flex;
       border-bottom: 1px solid var(--border);
       background: rgba(10, 10, 10, .6);
       backdrop-filter: blur(10px);
       position: sticky;
-      top: 65px;
+      top: 55px;
       z-index: 99
     }
 
     .tab-btn {
       flex: 1;
-      padding: 16px 8px;
+      padding: 14px 8px;
       background: none;
       border: none;
       cursor: pointer;
       font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: rgba(255, 255, 255, .4);
       letter-spacing: 1.5px;
@@ -151,10 +167,11 @@
 
     .tab-icon {
       display: block;
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 2px
     }
 
+    /* PAGES */
     .page {
       display: none;
       flex-direction: column;
@@ -178,8 +195,72 @@
       }
     }
 
+    /* PROMO CAROUSEL */
+    .promo-section {
+      padding: 16px 0 0;
+      overflow: hidden
+    }
+
+    .promo-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 12px;
+      padding: 0 24px 16px
+    }
+
+    .promo-carousel::-webkit-scrollbar {
+      display: none
+    }
+
+    .promo-slide {
+      flex: 0 0 85%;
+      scroll-snap-align: start;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .2s;
+      border: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .promo-slide:hover {
+      transform: scale(1.02)
+    }
+
+    .promo-slide img {
+      width: 100%;
+      height: auto;
+      display: block
+    }
+
+    .promo-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 4px 0 12px
+    }
+
+    .promo-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      transition: all .3s;
+      cursor: pointer
+    }
+
+    .promo-dot.active {
+      background: var(--red);
+      width: 18px;
+      border-radius: 3px
+    }
+
+    /* HERO */
     .hero {
-      padding: 40px 24px 24px;
+      padding: 32px 24px 20px;
       text-align: center
     }
 
@@ -196,7 +277,7 @@
       border-radius: 100px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 20px
+      margin-bottom: 16px
     }
 
     .hero-title {
@@ -204,7 +285,7 @@
       font-size: clamp(42px, 10vw, 72px);
       line-height: .95;
       letter-spacing: 2px;
-      margin-bottom: 12px
+      margin-bottom: 10px
     }
 
     .hero-title .accent {
@@ -216,12 +297,13 @@
       font-size: 16px;
       color: rgba(255, 255, 255, .6);
       max-width: 280px;
-      margin: 0 auto 32px;
+      margin: 0 auto 24px;
       line-height: 1.5
     }
 
+    /* REWARD */
     .reward-card {
-      margin: 0 24px 32px;
+      margin: 0 24px 24px;
       background: linear-gradient(135deg, var(--red-d) 0%, var(--red) 60%, #ff3a52 100%);
       border-radius: 20px;
       padding: 24px;
@@ -276,6 +358,7 @@
       opacity: .3
     }
 
+    /* FORM */
     .sb-alert {
       display: none;
       margin: 0 24px 16px;
@@ -381,6 +464,7 @@
       gap: 12px
     }
 
+    /* TERMS CHECK */
     .terms-check {
       display: flex;
       gap: 12px;
@@ -390,7 +474,8 @@
       border-radius: 12px;
       padding: 14px;
       margin-bottom: 22px;
-      cursor: pointer
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent
     }
 
     .terms-check input[type="checkbox"] {
@@ -434,6 +519,7 @@
       color: #ff8090
     }
 
+    /* SUBMIT BTN */
     .btn-submit {
       width: 100%;
       padding: 18px;
@@ -502,6 +588,60 @@
       }
     }
 
+    /* QUICK LINKS */
+    .quick-links {
+      padding: 8px 24px 28px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none
+    }
+
+    .quick-links::-webkit-scrollbar {
+      display: none
+    }
+
+    .quick-link {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all .25s;
+      text-decoration: none;
+      color: #fff;
+      min-width: 90px
+    }
+
+    .quick-link:hover {
+      border-color: rgba(200, 16, 46, .4);
+      background: rgba(200, 16, 46, .06);
+      transform: translateY(-2px)
+    }
+
+    .quick-link img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover
+    }
+
+    .quick-link span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      text-align: center;
+      white-space: nowrap
+    }
+
+    /* SUCCESS OVERLAY */
     .success-overlay {
       display: none;
       position: fixed;
@@ -571,6 +711,7 @@
       box-shadow: 0 8px 32px rgba(200, 16, 46, .45)
     }
 
+    /* TUTORIAL */
     .tutorial-header {
       padding: 32px 24px 24px;
       border-bottom: 1px solid var(--border)
@@ -612,9 +753,6 @@
       width: 100%;
       aspect-ratio: 16/9;
       background: #1a1a1a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       overflow: hidden
     }
@@ -622,8 +760,7 @@
     .video-thumb video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      border-radius: 0
+      object-fit: cover
     }
 
     .video-info {
@@ -651,6 +788,7 @@
       line-height: 1.4
     }
 
+    /* TERMS PAGE */
     .terms-page {
       padding: 32px 24px 60px
     }
@@ -715,6 +853,7 @@
       line-height: 1.6
     }
 
+    /* INSTALL BAR */
     .install-bar {
       position: fixed;
       bottom: 0;
@@ -786,12 +925,15 @@
 
 <body>
   <div class="app">
+    <!-- HEADER com logo oficial -->
     <header>
-      <div class="logo">SUPER<span>BET</span>
+      <div class="logo-badge-wrap">
+        <img src="brand-superbet-light.svg" alt="Superbet" class="logo-img" />
         <div class="logo-badge">25</div>
       </div>
-      <div style="font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase">Plataforma
-        Oficial</div>
+      <div class="header-right">
+        <div class="header-pill">Plataforma Oficial</div>
+      </div>
     </header>
 
     <nav class="tabs">
@@ -803,17 +945,60 @@
 
     <!-- CADASTRO -->
     <div class="page active" id="page-cadastro">
+
+      <!-- PROMO BANNERS CAROUSEL -->
+      <div class="promo-section">
+        <div class="promo-carousel" id="promo-carousel">
+          <div class="promo-slide" onclick="goToCreateAccount()">
+            <img src="25-10-06 - PlaybookFifaBreak_1_v3 (12).png" alt="Playbook Carnaval" />
+          </div>
+          <div class="promo-slide" onclick="goToCreateAccount()">
+            <img src="25-10-23 - SUPERScddUB_SO_v3.png" alt="SuperOdds" />
+          </div>
+          <div class="promo-slide" onclick="goToCreateAccount()">
+            <img src="25-12-30 - CASHBACK_SLOT_JANEIRO_v3 (2).png" alt="Cashback Diário" />
+          </div>
+        </div>
+        <div class="promo-dots" id="promo-dots"></div>
+      </div>
+
       <div class="hero">
         <div class="hero-badge">✦ Oferta Exclusiva</div>
         <h1 class="hero-title">CADASTRE<br><span class="accent">E GANHE</span></h1>
         <p class="hero-subtitle">Faça seu cadastro e receba seu bônus para jogar na plataforma</p>
       </div>
+
       <div class="reward-card">
         <div class="reward-label">SEU BÔNUS DE BOAS-VINDAS</div>
         <div class="reward-amount"><sup>R$</sup>25</div>
         <div class="reward-desc">Para jogar na plataforma após cadastro</div>
         <div class="reward-icon">🏆</div>
       </div>
+
+      <!-- QUICK LINKS -->
+      <div class="quick-links">
+        <a class="quick-link" onclick="goToCreateAccount()">
+          <img src="quick_links_superspin (1).png" alt="SuperSpin" />
+          <span>SuperSpin</span>
+        </a>
+        <a class="quick-link" onclick="goToCreateAccount()">
+          <span style="font-size:28px;line-height:1">⚽</span>
+          <span>Esportes</span>
+        </a>
+        <a class="quick-link" onclick="goToCreateAccount()">
+          <span style="font-size:28px;line-height:1">🎰</span>
+          <span>Cassino</span>
+        </a>
+        <a class="quick-link" onclick="goToCreateAccount()">
+          <span style="font-size:28px;line-height:1">🎁</span>
+          <span>Bônus</span>
+        </a>
+        <a class="quick-link" onclick="goToCreateAccount()">
+          <span style="font-size:28px;line-height:1">💰</span>
+          <span>Cashback</span>
+        </a>
+      </div>
+
       <div class="sb-alert" id="sb-alert"></div>
       <div class="form-card">
         <div class="form-title">SEUS DADOS</div>
@@ -925,7 +1110,8 @@
     <h2 class="success-title">CADASTRO REALIZADO!</h2>
     <p class="success-sub">Parabéns! Seus dados foram salvos com sucesso.<br><strong style="color:#ff8090">R$25</strong>
       serão liberados após verificação.<br><br>Fique atento ao seu WhatsApp!</p>
-    <button class="btn-ok" onclick="goToCreateAccount()">🚀 CRIAR MINHA CONTA</button>
+    <button class="btn-ok" onclick="goToCreateAccount()"
+      style="font-size:20px;padding:18px 40px;letter-spacing:2.5px">🚀 CRIAR MINHA CONTA</button>
   </div>
 
   <!-- INSTALL BAR -->
@@ -943,14 +1129,15 @@
     // ══════════════════════════════════════════
     var sb = null;
     try {
-      var SUPABASE_URL = 'https://xuykymqkoinksmkhljrm.supabase.co';
-      var SUPABASE_ANON = 'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs';
-      sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-    } catch (e) {
-      console.error('Supabase init error:', e);
-    }
+      sb = supabase.createClient(
+        'https://xuykymqkoinksmkhljrm.supabase.co',
+        'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs'
+      );
+    } catch (e) { console.error('Supabase init error:', e); }
 
-    // TABS
+    // ══════════════════════════════════════════
+    //  TABS
+    // ══════════════════════════════════════════
     function showPage(id, btn) {
       document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active') });
       document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active') });
@@ -963,7 +1150,59 @@
       document.getElementById('terms-check').classList.toggle('checked');
     }
 
-    // PHONE MASK
+    // ══════════════════════════════════════════
+    //  PROMO CAROUSEL — auto-scroll + dots
+    // ══════════════════════════════════════════
+    (function () {
+      var carousel = document.getElementById('promo-carousel');
+      var dotsWrap = document.getElementById('promo-dots');
+      var slides = carousel.querySelectorAll('.promo-slide');
+      var count = slides.length;
+      var current = 0;
+
+      // create dots
+      for (var i = 0; i < count; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'promo-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-i', i);
+        dot.onclick = function () { goToSlide(parseInt(this.getAttribute('data-i'))); };
+        dotsWrap.appendChild(dot);
+      }
+
+      function updateDots() {
+        var dots = dotsWrap.querySelectorAll('.promo-dot');
+        for (var j = 0; j < dots.length; j++) {
+          dots[j].classList.toggle('active', j === current);
+        }
+      }
+
+      function goToSlide(idx) {
+        current = idx;
+        slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        updateDots();
+      }
+
+      // auto-scroll every 4s
+      setInterval(function () {
+        current = (current + 1) % count;
+        goToSlide(current);
+      }, 4000);
+
+      // update dots on manual scroll
+      carousel.addEventListener('scroll', function () {
+        var scrollLeft = carousel.scrollLeft;
+        var slideWidth = slides[0].offsetWidth + 12; // gap
+        var idx = Math.round(scrollLeft / slideWidth);
+        if (idx !== current && idx >= 0 && idx < count) {
+          current = idx;
+          updateDots();
+        }
+      });
+    })();
+
+    // ══════════════════════════════════════════
+    //  PHONE MASK
+    // ══════════════════════════════════════════
     document.getElementById('whatsapp').addEventListener('input', function (e) {
       var v = e.target.value.replace(/\D/g, '').slice(0, 11);
       if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
@@ -975,8 +1214,9 @@
     function showAlert(msg, type) {
       type = type || 'error';
       var el = document.getElementById('sb-alert');
-      el.textContent = msg; el.className = 'sb-alert ' + type;
-      setTimeout(function () { el.className = 'sb-alert' }, 5000);
+      el.textContent = msg;
+      el.className = 'sb-alert ' + type;
+      setTimeout(function () { el.className = 'sb-alert'; }, 5000);
     }
 
     function validate() {
@@ -1015,17 +1255,10 @@
           whatsapp: document.getElementById('whatsapp').value.trim(),
           pix: document.getElementById('pix').value.trim(),
           status: 'Novo',
-          origem: 'superbet25-pwa',
+          origem: 'superbet25-pwa'
         }]);
-
         btn.classList.remove('loading'); btn.disabled = false;
-
-        if (result.error) {
-          console.error(result.error);
-          showAlert('⚠️ Erro ao salvar. Tente novamente.');
-          return;
-        }
-
+        if (result.error) { console.error(result.error); showAlert('⚠️ Erro ao salvar. Tente novamente.'); return; }
         document.getElementById('success-overlay').classList.add('show');
         ['nome', 'sobrenome', 'whatsapp', 'pix'].forEach(function (id) { document.getElementById(id).value = '' });
         document.getElementById('terms-check').classList.remove('checked');
@@ -1044,32 +1277,34 @@
       closeSuccess();
     }
 
-    // VIDEOS — Tutoriais locais (MP4)
+    // ══════════════════════════════════════════
+    //  VIDEOS — Tutoriais locais (MP4)
+    // ══════════════════════════════════════════
     var videos = [
       { num: 'Tutorial 1', title: 'Como se Cadastrar', desc: 'Aprenda o passo a passo para criar sua conta e garantir o bônus.', src: '1.mp4' },
       { num: 'Tutorial 2', title: 'Como Criar sua Conta na Plataforma', desc: 'Veja como finalizar seu cadastro na Superbet e ativar o bônus.', src: '2.mp4' },
-      { num: 'Tutorial 3', title: 'Como Usar seu Bônus de R$25', desc: 'Entenda como utilizar seus R$25 e começar a jogar.', src: '3.mp4' },
+      { num: 'Tutorial 3', title: 'Como Usar seu Bônus de R$25', desc: 'Entenda como utilizar seus R$25 e começar a jogar.', src: '3.mp4' }
     ];
-    var html = '';
+    var vhtml = '';
     for (var i = 0; i < videos.length; i++) {
       var v = videos[i];
-      html += '<div class="video-card">'
-        + '<div class="video-thumb">'
+      vhtml += '<div class="video-card"><div class="video-thumb">'
         + '<video controls playsinline preload="metadata" src="' + v.src + '"></video>'
-        + '</div>'
-        + '<div class="video-info">'
+        + '</div><div class="video-info">'
         + '<div class="video-num">' + v.num + '</div>'
         + '<div class="video-title-text">' + v.title + '</div>'
         + '<div class="video-desc-text">' + v.desc + '</div>'
         + '</div></div>';
     }
-    document.getElementById('video-list').innerHTML = html;
+    document.getElementById('video-list').innerHTML = vhtml;
 
-    // PWA INSTALL
+    // ══════════════════════════════════════════
+    //  PWA INSTALL
+    // ══════════════════════════════════════════
     var deferredPrompt;
-    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; setTimeout(function () { document.getElementById('install-bar').classList.add('show') }, 3000); });
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; setTimeout(function () { document.getElementById('install-bar').classList.add('show'); }, 3000); });
     document.getElementById('btn-install').addEventListener('click', async function () { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; closeInstall(); });
-    function closeInstall() { document.getElementById('install-bar').style.transform = 'translateY(100%)'; setTimeout(function () { document.getElementById('install-bar').classList.remove('show') }, 400); }
+    function closeInstall() { document.getElementById('install-bar').style.transform = 'translateY(100%)'; setTimeout(function () { document.getElementById('install-bar').classList.remove('show'); }, 400); }
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () { });
   </script>
 </body>
