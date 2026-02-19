@@ -1344,7 +1344,14 @@
     window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; setTimeout(function () { document.getElementById('install-bar').classList.add('show'); }, 3000); });
     document.getElementById('btn-install').addEventListener('click', async function () { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; closeInstall(); });
     function closeInstall() { document.getElementById('install-bar').style.transform = 'translateY(100%)'; setTimeout(function () { document.getElementById('install-bar').classList.remove('show'); }, 400); }
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js?v=5').catch(function () { });
+    // SW REMOVED FOR NO-CACHE
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
   </script>
 </body>
 
