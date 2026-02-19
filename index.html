@@ -1,360 +1,1085 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-  <meta name="theme-color" content="#C8102E"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-title" content="Superbet25"/>
-  <meta name="description" content="Cadastre-se e ganhe R$25 para jogar."/>
-  <link rel="manifest" href="manifest.json"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#C8102E" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Superbet25" />
+  <meta name="description" content="Cadastre-se e ganhe R$25 para jogar." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <title>Superbet25 — Ganhe R$25</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--red:#C8102E;--red-d:#9B0B22;--bg:#0a0a0a;--border:rgba(255,255,255,.08)}
-    body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:#fff;min-height:100vh;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-      background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,16,46,.22) 0%,transparent 70%)}
-    body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;
-      background-image:linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);background-size:40px 40px}
-    .app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
-    header{padding:20px 24px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85)}
-    .logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;display:flex;align-items:center;gap:8px}
-    .logo span{color:var(--red)}
-    .logo-badge{background:var(--red);font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:1px}
-    .tabs{display:flex;border-bottom:1px solid var(--border);background:rgba(10,10,10,.6);backdrop-filter:blur(10px);position:sticky;top:65px;z-index:99}
-    .tab-btn{flex:1;padding:16px 8px;background:none;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1.5px;text-transform:uppercase;position:relative;transition:color .3s}
-    .tab-btn.active{color:#fff}
-    .tab-btn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--red);transition:width .3s;border-radius:2px 2px 0 0}
-    .tab-btn.active::after{width:60%}
-    .tab-icon{display:block;font-size:18px;margin-bottom:2px}
-    .page{display:none;flex-direction:column;flex:1;animation:fadeUp .4s ease}
-    .page.active{display:flex}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .hero{padding:40px 24px 24px;text-align:center}
-    .hero-badge{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(200,16,46,.4);background:rgba(200,16,46,.08);color:#ff6b7a;font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
-    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,10vw,72px);line-height:.95;letter-spacing:2px;margin-bottom:12px}
-    .hero-title .accent{color:var(--red);display:block}
-    .hero-subtitle{font-size:16px;color:rgba(255,255,255,.6);max-width:280px;margin:0 auto 32px;line-height:1.5}
-    .reward-card{margin:0 24px 32px;background:linear-gradient(135deg,var(--red-d) 0%,var(--red) 60%,#ff3a52 100%);border-radius:20px;padding:24px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(200,16,46,.4)}
-    .reward-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:rgba(255,255,255,.08);border-radius:50%}
-    .reward-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:4px}
-    .reward-amount{font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;letter-spacing:2px}
-    .reward-amount sup{font-size:28px;vertical-align:super}
-    .reward-desc{font-size:13px;opacity:.85;margin-top:4px}
-    .reward-icon{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:48px;opacity:.3}
-    .sb-alert{display:none;margin:0 24px 16px;padding:14px 16px;border-radius:12px;font-size:13px;text-align:center}
-    .sb-alert.error{background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.3);color:#ff8080;display:block}
-    .form-card{margin:0 24px 24px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:28px 24px;backdrop-filter:blur(10px)}
-    .form-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-bottom:24px}
-    .field{margin-bottom:18px}
-    .field label{display:block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px}
-    .input-wrap{position:relative}
-    .input-wrap .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none;opacity:.5}
-    .field input{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.10);border-radius:12px;padding:14px 16px 14px 42px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:500;transition:all .2s;outline:none}
-    .field input::placeholder{color:rgba(255,255,255,.2)}
-    .field input:focus{border-color:var(--red);background:rgba(200,16,46,.06);box-shadow:0 0 0 3px rgba(200,16,46,.12)}
-    .field input.error{border-color:#ff4444}
-    .field-error{color:#ff6b6b;font-size:12px;margin-top:6px;display:none}
-    .field-error.show{display:block}
-    .name-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .terms-check{display:flex;gap:12px;align-items:flex-start;background:rgba(200,16,46,.06);border:1px solid rgba(200,16,46,.2);border-radius:12px;padding:14px;margin-bottom:22px;cursor:pointer}
-    .terms-check input[type="checkbox"]{display:none}
-    .check-box{width:20px;height:20px;min-width:20px;border:2px solid rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
-    .terms-check.checked .check-box{background:var(--red);border-color:var(--red)}
-    .check-box svg{opacity:0;transition:opacity .2s}
-    .terms-check.checked .check-box svg{opacity:1}
-    .terms-text{font-size:12px;color:rgba(255,255,255,.6);line-height:1.5}
-    .terms-text strong{color:#ff8090}
-    .btn-submit{width:100%;padding:18px;background:linear-gradient(135deg,var(--red) 0%,#ff2040 100%);border:none;border-radius:14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:#fff;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 32px rgba(200,16,46,.45)}
-    .btn-submit:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(200,16,46,.55)}
-    .btn-submit:active{transform:translateY(1px)}
-    .btn-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 50%)}
-    .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .btn-text{position:relative}
-    .spinner{display:none;width:20px;height:20px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
-    .btn-submit.loading .btn-text{display:none}
-    .btn-submit.loading .spinner{display:block}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .success-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(10,10,10,.97);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 32px}
-    .success-overlay.show{display:flex}
-    .success-icon{width:90px;height:90px;background:linear-gradient(135deg,var(--red) 0%,#ff2040 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:28px;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{box-shadow:0 0 40px rgba(200,16,46,.5)}50%{box-shadow:0 0 80px rgba(200,16,46,.7)}}
-    .success-title{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;margin-bottom:12px}
-    .success-sub{font-size:16px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:36px}
-    .btn-ok{padding:16px 48px;background:linear-gradient(135deg,var(--red) 0%,#ff2040 100%);border:none;border-radius:12px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff}
-    .tutorial-header{padding:32px 24px 24px;border-bottom:1px solid var(--border)}
-    .tutorial-header h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:6px}
-    .tutorial-header p{font-size:14px;color:rgba(255,255,255,.5)}
-    .video-list{padding:16px 24px 40px;display:flex;flex-direction:column;gap:16px}
-    .video-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:border-color .25s,transform .2s}
-    .video-card:hover{border-color:rgba(200,16,46,.4);transform:translateY(-2px)}
-    .video-thumb{width:100%;aspect-ratio:16/9;background:#1a1a1a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-    .video-thumb iframe{width:100%;height:100%;border:none;position:absolute;inset:0}
-    .thumb-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.2)}
-    .play-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--red) 0%,#ff2040 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;padding-left:4px}
-    .video-info{padding:18px}
-    .video-num{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
-    .video-title-text{font-size:17px;font-weight:700;margin-bottom:4px}
-    .video-desc-text{font-size:13px;color:rgba(255,255,255,.45);line-height:1.4}
-    .terms-page{padding:32px 24px 60px}
-    .terms-page h2{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;margin-bottom:6px}
-    .terms-page .subtitle{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:28px}
-    .terms-section{margin-bottom:28px}
-    .terms-section h3{font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(200,16,46,.2)}
-    .terms-section p,.terms-section li{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:8px}
-    .terms-section ul{padding-left:18px}
-    .terms-section li::marker{color:var(--red)}
-    .terms-highlight{background:rgba(200,16,46,.08);border:1px solid rgba(200,16,46,.25);border-radius:14px;padding:20px;margin:20px 0}
-    .terms-highlight p{font-size:15px;font-weight:600;color:rgba(255,255,255,.85);margin:0;line-height:1.6}
-    .install-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:rgba(20,20,20,.98);border-top:1px solid var(--border);padding:16px 24px;display:none;align-items:center;gap:14px;backdrop-filter:blur(20px);transform:translateY(100%);transition:transform .4s}
-    .install-bar.show{display:flex;transform:translateY(0)}
-    .install-text{flex:1}
-    .install-text strong{font-size:14px;display:block;margin-bottom:2px}
-    .install-text span{font-size:12px;color:rgba(255,255,255,.5)}
-    .btn-install{background:var(--red);border:none;border-radius:10px;padding:10px 18px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
-    .btn-install-close{background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:20px;padding:4px}
-    ::-webkit-scrollbar{width:4px}
-    ::-webkit-scrollbar-thumb{background:rgba(200,16,46,.3);border-radius:4px}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --red: #C8102E;
+      --red-d: #9B0B22;
+      --bg: #0a0a0a;
+      --border: rgba(255, 255, 255, .08)
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200, 16, 46, .22) 0%, transparent 70%)
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .04;
+      background-image: linear-gradient(rgba(255, 255, 255, .4) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .4) 1px, transparent 1px);
+      background-size: 40px 40px
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column
+    }
+
+    header {
+      padding: 20px 24px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, .85)
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .logo span {
+      color: var(--red)
+    }
+
+    .logo-badge {
+      background: var(--red);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 1px
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 10, .6);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 65px;
+      z-index: 99
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 16px 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      position: relative;
+      transition: color .3s
+    }
+
+    .tab-btn.active {
+      color: #fff
+    }
+
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--red);
+      transition: width .3s;
+      border-radius: 2px 2px 0 0
+    }
+
+    .tab-btn.active::after {
+      width: 60%
+    }
+
+    .tab-icon {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 2px
+    }
+
+    .page {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      animation: fadeUp .4s ease
+    }
+
+    .page.active {
+      display: flex
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .hero {
+      padding: 40px 24px 24px;
+      text-align: center
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(200, 16, 46, .4);
+      background: rgba(200, 16, 46, .08);
+      color: #ff6b7a;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 10vw, 72px);
+      line-height: .95;
+      letter-spacing: 2px;
+      margin-bottom: 12px
+    }
+
+    .hero-title .accent {
+      color: var(--red);
+      display: block
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, .6);
+      max-width: 280px;
+      margin: 0 auto 32px;
+      line-height: 1.5
+    }
+
+    .reward-card {
+      margin: 0 24px 32px;
+      background: linear-gradient(135deg, var(--red-d) 0%, var(--red) 60%, #ff3a52 100%);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(200, 16, 46, .4)
+    }
+
+    .reward-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 50%
+    }
+
+    .reward-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .8;
+      margin-bottom: 4px
+    }
+
+    .reward-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      line-height: 1;
+      letter-spacing: 2px
+    }
+
+    .reward-amount sup {
+      font-size: 28px;
+      vertical-align: super
+    }
+
+    .reward-desc {
+      font-size: 13px;
+      opacity: .85;
+      margin-top: 4px
+    }
+
+    .reward-icon {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 48px;
+      opacity: .3
+    }
+
+    .sb-alert {
+      display: none;
+      margin: 0 24px 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      text-align: center
+    }
+
+    .sb-alert.error {
+      background: rgba(255, 68, 68, .08);
+      border: 1px solid rgba(255, 68, 68, .3);
+      color: #ff8080;
+      display: block
+    }
+
+    .form-card {
+      margin: 0 24px 24px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      backdrop-filter: blur(10px)
+    }
+
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      margin-bottom: 24px
+    }
+
+    .field {
+      margin-bottom: 18px
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 8px
+    }
+
+    .input-wrap {
+      position: relative
+    }
+
+    .input-wrap .icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      opacity: .5
+    }
+
+    .field input {
+      width: 100%;
+      background: rgba(255, 255, 255, .05);
+      border: 1.5px solid rgba(255, 255, 255, .10);
+      border-radius: 12px;
+      padding: 14px 16px 14px 42px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all .2s;
+      outline: none
+    }
+
+    .field input::placeholder {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .field input:focus {
+      border-color: var(--red);
+      background: rgba(200, 16, 46, .06);
+      box-shadow: 0 0 0 3px rgba(200, 16, 46, .12)
+    }
+
+    .field input.error {
+      border-color: #ff4444
+    }
+
+    .field-error {
+      color: #ff6b6b;
+      font-size: 12px;
+      margin-top: 6px;
+      display: none
+    }
+
+    .field-error.show {
+      display: block
+    }
+
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .terms-check {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: rgba(200, 16, 46, .06);
+      border: 1px solid rgba(200, 16, 46, .2);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 22px;
+      cursor: pointer
+    }
+
+    .terms-check input[type="checkbox"] {
+      display: none
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 2px solid rgba(255, 255, 255, .2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      margin-top: 1px
+    }
+
+    .terms-check.checked .check-box {
+      background: var(--red);
+      border-color: var(--red)
+    }
+
+    .check-box svg {
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .terms-check.checked .check-box svg {
+      opacity: 1
+    }
+
+    .terms-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.5
+    }
+
+    .terms-text strong {
+      color: #ff8090
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 8px 32px rgba(200, 16, 46, .45)
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 40px rgba(200, 16, 46, .55)
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px)
+    }
+
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .15) 0%, transparent 50%)
+    }
+
+    .btn-submit:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .btn-text {
+      position: relative
+    }
+
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, .3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto
+    }
+
+    .btn-submit.loading .btn-text {
+      display: none
+    }
+
+    .btn-submit.loading .spinner {
+      display: block
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10, 10, 10, .97);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 32px
+    }
+
+    .success-overlay.show {
+      display: flex
+    }
+
+    .success-icon {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 28px;
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 40px rgba(200, 16, 46, .5)
+      }
+
+      50% {
+        box-shadow: 0 0 80px rgba(200, 16, 46, .7)
+      }
+    }
+
+    .success-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px;
+      letter-spacing: 3px;
+      margin-bottom: 12px
+    }
+
+    .success-sub {
+      font-size: 16px;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.6;
+      margin-bottom: 36px
+    }
+
+    .btn-ok {
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: #fff
+    }
+
+    .tutorial-header {
+      padding: 32px 24px 24px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .tutorial-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      margin-bottom: 6px
+    }
+
+    .tutorial-header p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .5)
+    }
+
+    .video-list {
+      padding: 16px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .video-card {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: border-color .25s, transform .2s
+    }
+
+    .video-card:hover {
+      border-color: rgba(200, 16, 46, .4);
+      transform: translateY(-2px)
+    }
+
+    .video-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .video-thumb iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      position: absolute;
+      inset: 0
+    }
+
+    .thumb-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .play-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      padding-left: 4px
+    }
+
+    .video-info {
+      padding: 18px
+    }
+
+    .video-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 4px
+    }
+
+    .video-title-text {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .video-desc-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .45);
+      line-height: 1.4
+    }
+
+    .terms-page {
+      padding: 32px 24px 60px
+    }
+
+    .terms-page h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      letter-spacing: 2px;
+      margin-bottom: 6px
+    }
+
+    .terms-page .subtitle {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: 28px
+    }
+
+    .terms-section {
+      margin-bottom: 28px
+    }
+
+    .terms-section h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(200, 16, 46, .2)
+    }
+
+    .terms-section p,
+    .terms-section li {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.7;
+      margin-bottom: 8px
+    }
+
+    .terms-section ul {
+      padding-left: 18px
+    }
+
+    .terms-section li::marker {
+      color: var(--red)
+    }
+
+    .terms-highlight {
+      background: rgba(200, 16, 46, .08);
+      border: 1px solid rgba(200, 16, 46, .25);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0
+    }
+
+    .terms-highlight p {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .85);
+      margin: 0;
+      line-height: 1.6
+    }
+
+    .install-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      background: rgba(20, 20, 20, .98);
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      display: none;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(20px);
+      transform: translateY(100%);
+      transition: transform .4s
+    }
+
+    .install-bar.show {
+      display: flex;
+      transform: translateY(0)
+    }
+
+    .install-text {
+      flex: 1
+    }
+
+    .install-text strong {
+      font-size: 14px;
+      display: block;
+      margin-bottom: 2px
+    }
+
+    .install-text span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .5)
+    }
+
+    .btn-install {
+      background: var(--red);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    .btn-install-close {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, .3);
+      cursor: pointer;
+      font-size: 20px;
+      padding: 4px
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(200, 16, 46, .3);
+      border-radius: 4px
+    }
   </style>
 </head>
+
 <body>
-<div class="app">
-  <header>
-    <div class="logo">SUPER<span>BET</span><div class="logo-badge">25</div></div>
-    <div style="font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase">Plataforma Oficial</div>
-  </header>
+  <div class="app">
+    <header>
+      <div class="logo">SUPER<span>BET</span>
+        <div class="logo-badge">25</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase">Plataforma
+        Oficial</div>
+    </header>
 
-  <nav class="tabs">
-    <button class="tab-btn active" onclick="showPage('cadastro',this)"><span class="tab-icon">📋</span>Cadastro</button>
-    <button class="tab-btn" onclick="showPage('tutorial',this)"><span class="tab-icon">🎬</span>Tutorial</button>
-    <button class="tab-btn" onclick="showPage('termos',this)"><span class="tab-icon">📄</span>Termos</button>
-  </nav>
+    <nav class="tabs">
+      <button class="tab-btn active" onclick="showPage('cadastro',this)"><span
+          class="tab-icon">📋</span>Cadastro</button>
+      <button class="tab-btn" onclick="showPage('tutorial',this)"><span class="tab-icon">🎬</span>Tutorial</button>
+      <button class="tab-btn" onclick="showPage('termos',this)"><span class="tab-icon">📄</span>Termos</button>
+    </nav>
 
-  <!-- CADASTRO -->
-  <div class="page active" id="page-cadastro">
-    <div class="hero">
-      <div class="hero-badge">✦ Oferta Exclusiva</div>
-      <h1 class="hero-title">CADASTRE<br><span class="accent">E GANHE</span></h1>
-      <p class="hero-subtitle">Faça seu cadastro e receba seu bônus para jogar na plataforma</p>
-    </div>
-    <div class="reward-card">
-      <div class="reward-label">SEU BÔNUS DE BOAS-VINDAS</div>
-      <div class="reward-amount"><sup>R$</sup>25</div>
-      <div class="reward-desc">Para jogar na plataforma após cadastro</div>
-      <div class="reward-icon">🏆</div>
-    </div>
-    <div class="sb-alert" id="sb-alert"></div>
-    <div class="form-card">
-      <div class="form-title">SEUS DADOS</div>
-      <div class="name-row">
-        <div class="field">
-          <label>Nome</label>
-          <div class="input-wrap"><span class="icon">👤</span>
-            <input type="text" id="nome" placeholder="Seu nome" autocomplete="given-name"/>
+    <!-- CADASTRO -->
+    <div class="page active" id="page-cadastro">
+      <div class="hero">
+        <div class="hero-badge">✦ Oferta Exclusiva</div>
+        <h1 class="hero-title">CADASTRE<br><span class="accent">E GANHE</span></h1>
+        <p class="hero-subtitle">Faça seu cadastro e receba seu bônus para jogar na plataforma</p>
+      </div>
+      <div class="reward-card">
+        <div class="reward-label">SEU BÔNUS DE BOAS-VINDAS</div>
+        <div class="reward-amount"><sup>R$</sup>25</div>
+        <div class="reward-desc">Para jogar na plataforma após cadastro</div>
+        <div class="reward-icon">🏆</div>
+      </div>
+      <div class="sb-alert" id="sb-alert"></div>
+      <div class="form-card">
+        <div class="form-title">SEUS DADOS</div>
+        <div class="name-row">
+          <div class="field">
+            <label>Nome</label>
+            <div class="input-wrap"><span class="icon">👤</span>
+              <input type="text" id="nome" placeholder="Seu nome" autocomplete="given-name" />
+            </div>
+            <div class="field-error" id="err-nome">Informe o nome</div>
           </div>
-          <div class="field-error" id="err-nome">Informe o nome</div>
+          <div class="field">
+            <label>Sobrenome</label>
+            <div class="input-wrap"><span class="icon">👤</span>
+              <input type="text" id="sobrenome" placeholder="Sobrenome" autocomplete="family-name" />
+            </div>
+            <div class="field-error" id="err-sobrenome">Informe o sobrenome</div>
+          </div>
         </div>
         <div class="field">
-          <label>Sobrenome</label>
-          <div class="input-wrap"><span class="icon">👤</span>
-            <input type="text" id="sobrenome" placeholder="Sobrenome" autocomplete="family-name"/>
+          <label>WhatsApp</label>
+          <div class="input-wrap"><span class="icon">📱</span>
+            <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" inputmode="numeric" />
           </div>
-          <div class="field-error" id="err-sobrenome">Informe o sobrenome</div>
+          <div class="field-error" id="err-whatsapp">Número inválido</div>
+        </div>
+        <div class="field">
+          <label>Chave PIX</label>
+          <div class="input-wrap"><span class="icon">💠</span>
+            <input type="text" id="pix" placeholder="CPF, e-mail, telefone ou aleatória" />
+          </div>
+          <div class="field-error" id="err-pix">Informe a chave PIX</div>
+        </div>
+        <div class="terms-check" id="terms-check" onclick="toggleTerms()">
+          <input type="checkbox" id="terms-cb" />
+          <div class="check-box">
+            <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+              <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="terms-text">Li e aceito os <strong>Termos de Uso</strong>. Estou ciente que devo cumprir as regras
+            para receber <strong>R$25</strong>.</div>
+        </div>
+        <button class="btn-submit" id="btn-submit" onclick="submitForm()">
+          <div class="btn-text">🚀 QUERO MEU BÔNUS DE R$25</div>
+          <div class="spinner"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- TUTORIAL -->
+    <div class="page" id="page-tutorial">
+      <div class="tutorial-header">
+        <h2>📚 CENTRAL DE TUTORIAIS</h2>
+        <p>Aprenda tudo sobre a plataforma e maximize seus ganhos</p>
+      </div>
+      <div class="video-list" id="video-list"></div>
+    </div>
+
+    <!-- TERMOS -->
+    <div class="page" id="page-termos">
+      <div class="terms-page">
+        <h2>TERMOS DE USO</h2>
+        <p class="subtitle">Última atualização: Janeiro 2025</p>
+        <div class="terms-highlight">
+          <p>🎯 Ao se cadastrar, você concorda com todos os termos abaixo e tem direito a receber <strong>R$25</strong>
+            para jogar após cumprir as regras.</p>
+        </div>
+        <div class="terms-section">
+          <h3>1. O Bônus de R$25</h3>
+          <p>Ao realizar seu cadastro completo e válido, você receberá <strong>R$25</strong> de bônus. O valor será
+            creditado após verificação dos seus dados.</p>
+        </div>
+        <div class="terms-section">
+          <h3>2. Regras para Receber</h3>
+          <ul>
+            <li>Preencher todos os dados corretamente.</li>
+            <li>Informar um WhatsApp válido e ativo.</li>
+            <li>A Chave PIX deve estar associada à sua conta.</li>
+            <li>Cada pessoa pode se cadastrar apenas uma vez.</li>
+            <li>Não é permitido uso de dados falsos ou de terceiros.</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>3. Uso da Plataforma</h3>
+          <ul>
+            <li>O usuário deve ter no mínimo 18 anos.</li>
+            <li>Proibido criar múltiplas contas.</li>
+            <li>A Superbet25 pode cancelar o bônus em caso de fraude.</li>
+            <li>O bônus não é transferível nem sacável diretamente.</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>4. Privacidade</h3>
+          <p>Seus dados serão usados exclusivamente para o cadastro e liberação do bônus. Não vendemos seus dados.</p>
+        </div>
+        <div class="terms-highlight" style="margin-top:28px">
+          <p>✅ Ao aceitar, você confirma que leu e concorda com todas as regras para receber seu bônus de
+            <strong>R$25</strong>.
+          </p>
         </div>
       </div>
-      <div class="field">
-        <label>WhatsApp</label>
-        <div class="input-wrap"><span class="icon">📱</span>
-          <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" inputmode="numeric"/>
-        </div>
-        <div class="field-error" id="err-whatsapp">Número inválido</div>
-      </div>
-      <div class="field">
-        <label>Chave PIX</label>
-        <div class="input-wrap"><span class="icon">💠</span>
-          <input type="text" id="pix" placeholder="CPF, e-mail, telefone ou aleatória"/>
-        </div>
-        <div class="field-error" id="err-pix">Informe a chave PIX</div>
-      </div>
-      <div class="terms-check" id="terms-check" onclick="toggleTerms()">
-        <input type="checkbox" id="terms-cb"/>
-        <div class="check-box">
-          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
-            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="terms-text">Li e aceito os <strong>Termos de Uso</strong>. Estou ciente que devo cumprir as regras para receber <strong>R$25</strong>.</div>
-      </div>
-      <button class="btn-submit" id="btn-submit" onclick="submitForm()">
-        <div class="btn-text">🚀 QUERO MEU BÔNUS DE R$25</div>
-        <div class="spinner"></div>
-      </button>
     </div>
   </div>
 
-  <!-- TUTORIAL -->
-  <div class="page" id="page-tutorial">
-    <div class="tutorial-header">
-      <h2>📚 CENTRAL DE TUTORIAIS</h2>
-      <p>Aprenda tudo sobre a plataforma e maximize seus ganhos</p>
-    </div>
-    <div class="video-list" id="video-list"></div>
+  <!-- SUCCESS -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-icon">🎉</div>
+    <h2 class="success-title">CADASTRO REALIZADO!</h2>
+    <p class="success-sub">Parabéns! Seus dados foram salvos com sucesso.<br><strong style="color:#ff8090">R$25</strong>
+      serão liberados após verificação.<br><br>Fique atento ao seu WhatsApp!</p>
+    <button class="btn-ok" onclick="goToCreateAccount()"
+      style="font-size:20px;padding:18px 40px;letter-spacing:2.5px">🚀 CRIAR MINHA CONTA</button>
   </div>
 
-  <!-- TERMOS -->
-  <div class="page" id="page-termos">
-    <div class="terms-page">
-      <h2>TERMOS DE USO</h2>
-      <p class="subtitle">Última atualização: Janeiro 2025</p>
-      <div class="terms-highlight"><p>🎯 Ao se cadastrar, você concorda com todos os termos abaixo e tem direito a receber <strong>R$25</strong> para jogar após cumprir as regras.</p></div>
-      <div class="terms-section"><h3>1. O Bônus de R$25</h3><p>Ao realizar seu cadastro completo e válido, você receberá <strong>R$25</strong> de bônus. O valor será creditado após verificação dos seus dados.</p></div>
-      <div class="terms-section"><h3>2. Regras para Receber</h3><ul><li>Preencher todos os dados corretamente.</li><li>Informar um WhatsApp válido e ativo.</li><li>A Chave PIX deve estar associada à sua conta.</li><li>Cada pessoa pode se cadastrar apenas uma vez.</li><li>Não é permitido uso de dados falsos ou de terceiros.</li></ul></div>
-      <div class="terms-section"><h3>3. Uso da Plataforma</h3><ul><li>O usuário deve ter no mínimo 18 anos.</li><li>Proibido criar múltiplas contas.</li><li>A Superbet25 pode cancelar o bônus em caso de fraude.</li><li>O bônus não é transferível nem sacável diretamente.</li></ul></div>
-      <div class="terms-section"><h3>4. Privacidade</h3><p>Seus dados serão usados exclusivamente para o cadastro e liberação do bônus. Não vendemos seus dados.</p></div>
-      <div class="terms-highlight" style="margin-top:28px"><p>✅ Ao aceitar, você confirma que leu e concorda com todas as regras para receber seu bônus de <strong>R$25</strong>.</p></div>
-    </div>
+  <!-- INSTALL BAR -->
+  <div class="install-bar" id="install-bar">
+    <span style="font-size:28px">📲</span>
+    <div class="install-text"><strong>Instalar Superbet25</strong><span>Acesse mais rápido pelo celular</span></div>
+    <button class="btn-install" id="btn-install">Instalar</button>
+    <button class="btn-install-close" onclick="closeInstall()">✕</button>
   </div>
-</div>
 
-<!-- SUCCESS -->
-<div class="success-overlay" id="success-overlay">
-  <div class="success-icon">🎉</div>
-  <h2 class="success-title">CADASTRO REALIZADO!</h2>
-  <p class="success-sub">Parabéns! Seus dados foram salvos com sucesso.<br><strong style="color:#ff8090">R$25</strong> serão liberados após verificação.<br><br>Fique atento ao seu WhatsApp!</p>
-  <button class="btn-ok" onclick="closeSuccess()">CONTINUAR</button>
-</div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ══════════════════════════════════════════
+    //  SUPABASE CONFIG
+    // ══════════════════════════════════════════
+    const SUPABASE_URL = 'https://xuykymqkoinksmkhljrm.supabase.co';
+    const SUPABASE_ANON = 'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-<!-- INSTALL BAR -->
-<div class="install-bar" id="install-bar">
-  <span style="font-size:28px">📲</span>
-  <div class="install-text"><strong>Instalar Superbet25</strong><span>Acesse mais rápido pelo celular</span></div>
-  <button class="btn-install" id="btn-install">Instalar</button>
-  <button class="btn-install-close" onclick="closeInstall()">✕</button>
-</div>
+    // TABS
+    function showPage(id, btn) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-// ══════════════════════════════════════════
-//  SUPABASE CONFIG
-// ══════════════════════════════════════════
-const SUPABASE_URL  = 'https://xuykymqkoinksmkhljrm.supabase.co';
-const SUPABASE_ANON = 'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    function toggleTerms() {
+      document.getElementById('terms-check').classList.toggle('checked');
+    }
 
-// TABS
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+    // PHONE MASK
+    document.getElementById('whatsapp').addEventListener('input', function (e) {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+      else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d*)$/, '($1) $2-$3');
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d*)$/, '($1) $2');
+      e.target.value = v;
+    });
 
-function toggleTerms(){
-  document.getElementById('terms-check').classList.toggle('checked');
-}
+    function showAlert(msg, type = 'error') {
+      const el = document.getElementById('sb-alert');
+      el.textContent = msg; el.className = 'sb-alert ' + type;
+      setTimeout(() => el.className = 'sb-alert', 5000);
+    }
 
-// PHONE MASK
-document.getElementById('whatsapp').addEventListener('input',function(e){
-  let v=e.target.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>10) v=v.replace(/^(\d{2})(\d{5})(\d{4})$/,'($1) $2-$3');
-  else if(v.length>6) v=v.replace(/^(\d{2})(\d{4})(\d*)$/,'($1) $2-$3');
-  else if(v.length>2) v=v.replace(/^(\d{2})(\d*)$/,'($1) $2');
-  e.target.value=v;
-});
+    function validate() {
+      let ok = true;
+      [{ id: 'nome', err: 'err-nome', test: v => v.trim().length >= 2 },
+      { id: 'sobrenome', err: 'err-sobrenome', test: v => v.trim().length >= 2 },
+      { id: 'whatsapp', err: 'err-whatsapp', test: v => v.replace(/\D/g, '').length >= 10 },
+      { id: 'pix', err: 'err-pix', test: v => v.trim().length >= 5 }
+      ].forEach(f => {
+        const el = document.getElementById(f.id), er = document.getElementById(f.err);
+        if (!f.test(el.value)) { el.classList.add('error'); er.classList.add('show'); ok = false; }
+        else { el.classList.remove('error'); er.classList.remove('show'); }
+      });
+      if (!document.getElementById('terms-check').classList.contains('checked')) {
+        alert('Você precisa aceitar os Termos de Uso.'); ok = false;
+      }
+      return ok;
+    }
 
-function showAlert(msg,type='error'){
-  const el=document.getElementById('sb-alert');
-  el.textContent=msg; el.className='sb-alert '+type;
-  setTimeout(()=>el.className='sb-alert',5000);
-}
+    // ══════════════════════════════════════════
+    //  SUBMIT → SALVA NO SUPABASE
+    // ══════════════════════════════════════════
+    async function submitForm() {
+      if (!validate()) return;
+      const btn = document.getElementById('btn-submit');
+      btn.classList.add('loading'); btn.disabled = true;
 
-function validate(){
-  let ok=true;
-  [{id:'nome',err:'err-nome',test:v=>v.trim().length>=2},
-   {id:'sobrenome',err:'err-sobrenome',test:v=>v.trim().length>=2},
-   {id:'whatsapp',err:'err-whatsapp',test:v=>v.replace(/\D/g,'').length>=10},
-   {id:'pix',err:'err-pix',test:v=>v.trim().length>=5}
-  ].forEach(f=>{
-    const el=document.getElementById(f.id),er=document.getElementById(f.err);
-    if(!f.test(el.value)){el.classList.add('error');er.classList.add('show');ok=false;}
-    else{el.classList.remove('error');er.classList.remove('show');}
-  });
-  if(!document.getElementById('terms-check').classList.contains('checked')){
-    alert('Você precisa aceitar os Termos de Uso.');ok=false;
-  }
-  return ok;
-}
+      const { error } = await sb.from('leads').insert([{
+        nome: document.getElementById('nome').value.trim(),
+        sobrenome: document.getElementById('sobrenome').value.trim(),
+        whatsapp: document.getElementById('whatsapp').value.trim(),
+        pix: document.getElementById('pix').value.trim(),
+        status: 'Novo',
+        origem: 'superbet25-pwa',
+      }]);
 
-// ══════════════════════════════════════════
-//  SUBMIT → SALVA NO SUPABASE
-// ══════════════════════════════════════════
-async function submitForm(){
-  if(!validate()) return;
-  const btn=document.getElementById('btn-submit');
-  btn.classList.add('loading'); btn.disabled=true;
+      btn.classList.remove('loading'); btn.disabled = false;
 
-  const {error} = await sb.from('leads').insert([{
-    nome:     document.getElementById('nome').value.trim(),
-    sobrenome:document.getElementById('sobrenome').value.trim(),
-    whatsapp: document.getElementById('whatsapp').value.trim(),
-    pix:      document.getElementById('pix').value.trim(),
-    status:   'Novo',
-    origem:   'superbet25-pwa',
-  }]);
+      if (error) {
+        console.error(error);
+        showAlert('⚠️ Erro ao salvar. Tente novamente.');
+        return;
+      }
 
-  btn.classList.remove('loading'); btn.disabled=false;
+      document.getElementById('success-overlay').classList.add('show');
+      ['nome', 'sobrenome', 'whatsapp', 'pix'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('terms-check').classList.remove('checked');
+    }
 
-  if(error){
-    console.error(error);
-    showAlert('⚠️ Erro ao salvar. Tente novamente.');
-    return;
-  }
+    function closeSuccess() { document.getElementById('success-overlay').classList.remove('show'); }
 
-  document.getElementById('success-overlay').classList.add('show');
-  ['nome','sobrenome','whatsapp','pix'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('terms-check').classList.remove('checked');
-}
+    const SUPERBET_LINK = 'https://wlsuperbet.adsrv.eacdn.com/C.ashx?btag=a_20689b_431c_&affid=662&siteid=20689&adid=431&c=MarcosAntonio';
+    function goToCreateAccount() {
+      window.open(SUPERBET_LINK, '_blank');
+      closeSuccess();
+    }
 
-function closeSuccess(){document.getElementById('success-overlay').classList.remove('show');}
-
-// VIDEOS
-const videos=[
-  {num:'Aula 01',title:'Bem-vindo à Superbet25',desc:'Conheça a plataforma e como garantir seu bônus de R$25.',youtubeId:''},
-  {num:'Aula 02',title:'Como Preencher seu Cadastro',desc:'Passo a passo completo de como preencher seus dados.',youtubeId:''},
-  {num:'Aula 03',title:'Como Receber seu Bônus',desc:'Entenda o processo de liberação dos seus R$25.',youtubeId:''},
-  {num:'Aula 04',title:'Dicas Para Maximizar Ganhos',desc:'Estratégias para aproveitar ao máximo sua conta.',youtubeId:''},
-];
-document.getElementById('video-list').innerHTML=videos.map((v,i)=>`
+    // VIDEOS — Tutoriais locais (MP4)
+    const videos = [
+      { num: 'Tutorial 1', title: 'Como se Cadastrar', desc: 'Aprenda o passo a passo para criar sua conta e garantir o bônus.', src: '1.mp4' },
+      { num: 'Tutorial 2', title: 'Como Criar sua Conta na Plataforma', desc: 'Veja como finalizar seu cadastro na Superbet e ativar o bônus.', src: '2.mp4' },
+      { num: 'Tutorial 3', title: 'Como Usar seu Bônus de R$25', desc: 'Entenda como utilizar seus R$25 e começar a jogar.', src: '3.mp4' },
+    ];
+    document.getElementById('video-list').innerHTML = videos.map((v, i) => `
   <div class="video-card" id="vcard-${i}">
-    <div class="video-thumb" id="vthumb-${i}">
-      ${v.youtubeId
-        ?`<iframe src="https://www.youtube.com/embed/${v.youtubeId}?rel=0" allowfullscreen></iframe>`
-        :`<div class="thumb-placeholder"><div class="play-icon">▶</div><span>Vídeo em breve</span></div>`}
+    <div class="video-thumb">
+      <video controls playsinline preload="metadata"
+        style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:18px 18px 0 0"
+        src="${v.src}">
+        Seu navegador não suporta vídeos.
+      </video>
     </div>
     <div class="video-info">
       <div class="video-num">${v.num}</div>
       <div class="video-title-text">${v.title}</div>
       <div class="video-desc-text">${v.desc}</div>
     </div>
-    ${v.youtubeId?`<button class="btn-load-video" onclick="loadVideo(${i},'${v.youtubeId}')">▶ ASSISTIR</button>`:''}
   </div>`).join('');
 
-function loadVideo(i,ytId){
-  document.getElementById('vthumb-'+i).innerHTML=`<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0" allowfullscreen allow="autoplay"></iframe>`;
-  document.getElementById('vcard-'+i).classList.add('video-loaded');
-}
-
-// PWA INSTALL
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;setTimeout(()=>document.getElementById('install-bar').classList.add('show'),3000);});
-document.getElementById('btn-install').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;closeInstall();});
-function closeInstall(){document.getElementById('install-bar').style.transform='translateY(100%)';setTimeout(()=>document.getElementById('install-bar').classList.remove('show'),400);}
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script>
+    // PWA INSTALL
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; setTimeout(() => document.getElementById('install-bar').classList.add('show'), 3000); });
+    document.getElementById('btn-install').addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; closeInstall(); });
+    function closeInstall() { document.getElementById('install-bar').style.transform = 'translateY(100%)'; setTimeout(() => document.getElementById('install-bar').classList.remove('show'), 400); }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => { });
+  </script>
 </body>
+
 </html>
