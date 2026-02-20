@@ -1,0 +1,25 @@
+
+======================================================
+  NOVIBET - Deploy Automatico Supabase
+======================================================
+
+[1/4] Testando conexao com Supabase...
+  AVISO - Status inesperado, continuando...
+[2/4] Verificando se tabela "leads" ja existe...
+  OK - Tabela "leads" encontrada! (8 registros)
+  A tabela ja esta configurada.
+[3/4] Executando migration SQL...
+  AVISO - Management API requer token de acesso pessoal.
+  O Service Role Key nao funciona na Management API.
+
+  Mas a tabela ja existe, entao nao ha problema!
+[4/4] Verificacao final...
+  AVISO - Tabela ainda nao encontrada.
+  Execute o SQL manualmente:
+  https://supabase.com/dashboard/project/kurbzeeruouuutlwwpte/sql
+
+URLs do projeto:
+  Frontend: https://novibet-pwa.vercel.app
+  Backend:  https://kurbzeeruouuutlwwpte.supabase.co
+  Dash SQL: https://supabase.com/dashboard/project/kurbzeeruouuutlwwpte/sql
+

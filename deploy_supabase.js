@@ -59,9 +59,13 @@ DO $$ BEGIN
     SELECT 1 FROM pg_publication_tables
     WHERE pubname='supabase_realtime' AND tablename='leads'
   ) THEN
-    ALTER PUBLICATION supabase_realtime ADD TABLE leads;
+  ALTER PUBLICATION supabase_realtime ADD TABLE leads;
   END IF;
 END $$;
+
+-- CPA Tracking
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS cpa_house text;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS cpa_value numeric DEFAULT 150.00;
 `;
 
 // ── HTTP HELPER ─────────────────────────────────────────

@@ -468,7 +468,7 @@
 
     .stats-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px
     }
 
@@ -680,7 +680,7 @@
 
     .table-head {
       display: grid;
-      grid-template-columns: 40px 1fr 150px 150px 180px 110px 90px;
+      grid-template-columns: 40px 1fr 130px 130px 140px 120px 100px 100px 90px;
       padding: 12px 20px;
       border-bottom: 1px solid var(--border);
       font-size: 10px;
@@ -691,23 +691,9 @@
       background: rgba(255, 255, 255, .02)
     }
 
-    .table-body {
-      max-height: 540px;
-      overflow-y: auto
-    }
-
-    .table-body::-webkit-scrollbar {
-      width: 3px
-    }
-
-    .table-body::-webkit-scrollbar-thumb {
-      background: rgba(200, 16, 46, .3);
-      border-radius: 3px
-    }
-
     .table-row {
       display: grid;
-      grid-template-columns: 40px 1fr 150px 150px 180px 110px 90px;
+      grid-template-columns: 40px 1fr 130px 130px 140px 120px 100px 100px 90px;
       padding: 16px 20px;
       border-bottom: 1px solid var(--border);
       align-items: center;
@@ -811,6 +797,12 @@
       background: rgba(34, 197, 94, .1);
       color: var(--green);
       border: 1px solid rgba(34, 197, 94, .2)
+    }
+
+    .status-waiting {
+      background: rgba(245, 158, 11, .12);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, .25)
     }
 
     .row-actions {
@@ -1264,6 +1256,18 @@
             <div class="stat-sub">R$20 × total leads</div>
             <div class="stat-icon">💰</div>
           </div>
+          <div class="stat-card green">
+            <div class="stat-label">Lucro Total (CPA)</div>
+            <div class="stat-value" id="stat-profit">—</div>
+            <div class="stat-sub">leads verificados</div>
+            <div class="stat-icon">💵</div>
+          </div>
+          <div class="stat-card amber">
+            <div class="stat-label">Potencial Futuro</div>
+            <div class="stat-value" id="stat-potential">—</div>
+            <div class="stat-sub">leads em reserva</div>
+            <div class="stat-icon">⏳</div>
+          </div>
         </div>
       </div>
 
@@ -1279,6 +1283,10 @@
             <option value="">Todos os status</option>
             <option value="Novo">Novo</option>
             <option value="Verificado">Verificado</option>
+            <option value="Reserva">Reserva (Nova Casa)</option>
+          </select>
+          <select class="filter-select" id="filter-house" onchange="filterAndRender()">
+            <option value="">Todas as Casas</option>
           </select>
           <button class="btn btn-ghost" onclick="loadLeads()">🔄 Atualizar</button>
           <button class="btn btn-primary" onclick="exportCSV()">⬇ Exportar CSV</button>
@@ -1291,6 +1299,8 @@
             <div class="col-phone">WhatsApp</div>
             <div class="col-pix">Chave PIX</div>
             <div class="col-date">Data/Hora</div>
+            <div>Casa (CPA)</div>
+            <div>Lucro</div>
             <div>Status</div>
             <div style="text-align:right">Ações</div>
           </div>
@@ -1306,6 +1316,24 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- TELEGRAM FOOTER NO DASHBOARD -->
+    <div
+      style="padding: 32px 24px; text-align: center; background: rgba(255, 255, 255, .02); border-top: 1px solid var(--border); margin-top: 40px;">
+      <h3
+        style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1.1; letter-spacing: 1.5px; margin-bottom: 12px; color: #fff;">
+        DINHEIRO TODA SEMANA PRA VC<br>TESTAR UMA CASA NOVA!</h3>
+      <p style="font-size: 15px; color: rgba(255, 255, 255, .6); margin-bottom: 24px; line-height: 1.5;">Junte-se ao
+        nosso grupo exclusivo no Telegram para acompanhar novidades, dicas e promoções diárias.</p>
+      <a href="https://t.me/+u6dJJrQyuMlhZWJh" target="_blank"
+        style="display: inline-flex; align-items: center; gap: 8px; background: #0088cc; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 15px; transition: transform 0.2s; box-shadow: 0 4px 16px rgba(0, 136, 204, 0.3);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.84 1.18-5.18 3.44-.49.34-.93.5-1.32.49-.43-.01-1.26-.24-1.87-.44-.75-.25-1.36-.38-1.3-.81.03-.23.34-.47.93-.73 3.65-1.59 6.09-2.64 7.32-3.15 3.49-1.45 4.22-1.71 4.7-1.72.11 0 .34.03.49.14.12.09.16.22.17.33.01.07.01.16 0 .22z" />
+        </svg>
+        ENTRAR NO GRUPO VIP
+      </a>
     </div>
   </div>
 
@@ -1419,6 +1447,33 @@
       document.getElementById('clock').textContent = new Date().toLocaleTimeString('pt-BR');
     }
 
+    // ── DYNAMIC HOUSES LIST ──
+    var knownHouses = ['Novibet', 'Betano', 'Bet365', 'Sportingbet'];
+
+    function extractDynamicHouses() {
+      // Find all unique houses from leads
+      for (var i = 0; i < allLeads.length; i++) {
+        var h = allLeads[i].cpa_house;
+        if (h && h.trim() !== '' && knownHouses.indexOf(h) === -1) {
+          knownHouses.push(h);
+        }
+      }
+      knownHouses.sort();
+      updateHouseFilterDropdown();
+    }
+
+    function updateHouseFilterDropdown() {
+      var select = document.getElementById('filter-house');
+      if (!select) return;
+      var currVal = select.value;
+
+      var html = '<option value="">Todas as Casas</option>';
+      for (var i = 0; i < knownHouses.length; i++) {
+        html += '<option value="' + esc(knownHouses[i]) + '" ' + (currVal === knownHouses[i] ? 'selected' : '') + '>' + esc(knownHouses[i]) + '</option>';
+      }
+      select.innerHTML = html;
+    }
+
     // ── LOAD LEADS ──
     async function loadLeads() {
       if (!sb) return;
@@ -1435,6 +1490,7 @@
         return;
       }
       allLeads = result.data || [];
+      extractDynamicHouses();
       filterAndRender();
       updateStats();
     }
@@ -1479,7 +1535,14 @@
       animNum('stat-total', total);
       animNum('stat-today', today);
       animNum('stat-week', week);
+      animNum('stat-week', week);
       document.getElementById('stat-bonus').textContent = 'R$' + (total * 20).toLocaleString('pt-BR');
+
+      var profit = calculateTotalProfit();
+      document.getElementById('stat-profit').textContent = 'R$ ' + profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      var reserve = allLeads.filter(function (l) { return l.status === 'Reserva' || (l.status === 'Verificado' && l.cpa_house); }).length;
+      document.getElementById('stat-potential').textContent = 'R$ ' + (reserve * 150).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     }
 
     function animNum(id, target) {
@@ -1499,11 +1562,13 @@
     function filterAndRender() {
       var q = document.getElementById('search-input').value.toLowerCase();
       var st = document.getElementById('filter-status').value;
+      var houseSt = document.getElementById('filter-house').value;
       filtered = allLeads.filter(function (l) {
         var name = (l.nome + ' ' + l.sobrenome).toLowerCase();
         var matchQ = !q || name.indexOf(q) >= 0 || (l.whatsapp || '').indexOf(q) >= 0 || (l.pix || '').toLowerCase().indexOf(q) >= 0;
         var matchS = !st || (l.status || 'Novo') === st;
-        return matchQ && matchS;
+        var matchH = !houseSt || (l.cpa_house || '') === houseSt;
+        return matchQ && matchS && matchH;
       });
       currentPage = 1;
       renderTable();
@@ -1531,14 +1596,31 @@
         var dateStr = d.toLocaleDateString('pt-BR');
         var timeStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         var status = l.status || 'Novo';
-        var stClass = status === 'Verificado' ? 'status-ok' : 'status-new';
+        var stClass = 'status-new';
+        if (status === 'Verificado') stClass = 'status-ok';
+        else if (status === 'Reserva') stClass = 'status-waiting';
         var globalIdx = allLeads.indexOf(l) + 1;
+
+        // CPA Logic
+        var house = l.cpa_house || '';
+        var profit = house ? 'R$ 150,00' : '—';
+        var profitClass = house ? 'color:var(--green);font-weight:700' : 'color:var(--subtle)';
+
         html += '<div class="table-row" style="animation-delay:' + (i * 0.025) + 's">'
           + '<div class="row-num col-num">' + globalIdx + '</div>'
           + '<div class="row-name">' + esc(l.nome) + ' ' + esc(l.sobrenome) + '<span>' + esc(l.origem || 'pwa') + '</span></div>'
           + '<div class="row-cell col-phone">' + esc(l.whatsapp || '—') + '</div>'
           + '<div class="row-cell col-pix">' + esc(l.pix || '—') + '</div>'
           + '<div class="row-date col-date">' + dateStr + ' ' + timeStr + '</div>'
+
+          // CPA Columns
+          + '<div><select class="filter-select dynamic-house-select" data-id="' + l.id + '" style="padding:6px;font-size:11px;width:100%" onchange="handleHouseSelect(this)">'
+          + '<option value="">Selecione...</option>'
+          + knownHouses.map(function (h) { return '<option value="' + esc(h) + '" ' + (house === h ? 'selected' : '') + '>' + esc(h) + '</option>'; }).join('')
+          + '<option value="_ADD_NEW_" style="font-weight:bold;color:var(--green)">+ Adicionar Nova...</option>'
+          + '</select></div>'
+          + '<div class="row-cell" style="' + profitClass + '">' + profit + '</div>'
+
           + '<div><span class="row-status ' + stClass + '">' + status + '</span></div>'
           + '<div class="row-actions">'
           + '<button class="btn-icon" title="Ver detalhes" onclick="openModal(\'' + l.id + '\')">👁</button>'
@@ -1590,6 +1672,7 @@
         + '<select class="filter-select" style="width:100%" onchange="changeStatus(\'' + l.id + '\',this.value)">'
         + '<option ' + ((l.status || 'Novo') === 'Novo' ? 'selected' : '') + '>Novo</option>'
         + '<option ' + (l.status === 'Verificado' ? 'selected' : '') + '>Verificado</option>'
+        + '<option ' + (l.status === 'Reserva' ? 'selected' : '') + '>Reserva</option>'
         + '</select></div>'
         + '<div style="display:flex;gap:8px;margin-top:20px">'
         + '<button class="btn btn-primary" style="flex:1" onclick="copyText(\'' + esc(l.whatsapp || '') + '\',\'WhatsApp\')">📋 Copiar WhatsApp</button>'
@@ -1647,6 +1730,75 @@
       a.download = 'novibet_leads_' + new Date().toISOString().slice(0, 10) + '.csv';
       a.click();
       toast('CSV exportado com ' + allLeads.length + ' leads!', 'success');
+    }
+
+    // ── CPA LOGIC ──
+    function handleHouseSelect(selectEl) {
+      var val = selectEl.value;
+      var id = selectEl.getAttribute('data-id');
+
+      if (val === '_ADD_NEW_') {
+        // Reset to previous value in case of cancel
+        var l = allLeads.find(function (x) { return x.id === id; });
+        var oldVal = l && l.cpa_house ? l.cpa_house : '';
+        selectEl.value = oldVal;
+
+        var newHouse = prompt('Qual o nome da nova Casa de Apostas?');
+        if (!newHouse || newHouse.trim() === '') {
+          return; // User cancelled
+        }
+        newHouse = newHouse.trim();
+        // Add to known houses if not already there
+        if (knownHouses.indexOf(newHouse) === -1) {
+          knownHouses.push(newHouse);
+          knownHouses.sort();
+          updateHouseFilterDropdown();
+        }
+        // Now update lead
+        updateLeadCPA(id, newHouse);
+        return;
+      }
+
+      // Standard value selected
+      updateLeadCPA(id, val);
+    }
+
+    async function updateLeadCPA(id, house) {
+      if (!sb) return;
+      var val = house && house !== 'Outra' ? 150.00 : 0.00;
+      // Optimistic update
+      var idx = allLeads.findIndex(function (l) { return l.id === id; });
+      if (idx >= 0) {
+        allLeads[idx].cpa_house = house;
+        allLeads[idx].cpa_value = val;
+        // Check if we need to add a newly discovered house
+        if (house && house.trim() !== '' && knownHouses.indexOf(house) === -1) {
+          knownHouses.push(house);
+          knownHouses.sort();
+          updateHouseFilterDropdown();
+        }
+        renderTable();
+        updateStats();
+      }
+
+      var result = await sb.from('leads').update({ cpa_house: house, cpa_value: val }).eq('id', id);
+      if (result.error) {
+        toast('Erro ao atualizar CPA', 'error');
+        // Revert? For now just warn
+        console.error(result.error);
+      } else {
+        toast('CPA atualizado: ' + (house || 'Removido'), 'success');
+      }
+    }
+
+    function calculateTotalProfit() {
+      var sum = 0;
+      for (var i = 0; i < allLeads.length; i++) {
+        if (allLeads[i].cpa_house) {
+          sum += (parseFloat(allLeads[i].cpa_value) || 150);
+        }
+      }
+      return sum;
     }
 
     // ── TOAST ──
