@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Superbet25 — Dashboard</title>
+  <title>Novibet — Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -20,14 +20,14 @@
     }
 
     :root {
-      --red: #C8102E;
-      --red-l: #E8192F;
-      --red-d: #9B0B22;
-      --bg: #080808;
-      --surface: #111;
-      --surface2: #181818;
-      --surface3: #1f1f1f;
-      --border: rgba(255, 255, 255, .07);
+      --red: #ffffff;
+      --red-l: #f0f0f0;
+      --red-d: #e0e0e0;
+      --bg: #0d1b2a;
+      --surface: #1b263b;
+      --surface2: #24344d;
+      --surface3: #2d405e;
+      --border: rgba(255, 255, 255, .1);
       --border2: rgba(255, 255, 255, .12);
       --text: #f0f0f0;
       --muted: rgba(255, 255, 255, .38);
@@ -56,7 +56,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200, 16, 46, .18) 0%, transparent 70%)
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(13, 27, 42, 1) 0%, transparent 70%)
     }
 
     /* ═══════════════════════════════════════════
@@ -96,7 +96,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--red), #ff3a52, var(--red))
+      background: linear-gradient(90deg, var(--red), #e0e0e0, var(--red))
     }
 
     .login-logo {
@@ -164,7 +164,8 @@
       font-family: 'Syne', sans-serif;
       font-size: 15px;
       outline: none;
-      transition: border-color .2s, box-shadow .2s
+      transition: border-color .2s, box-shadow .2s;
+      background: var(--surface2);
     }
 
     .login-field input::placeholder {
@@ -287,7 +288,8 @@
       justify-content: space-between;
       padding: 0 32px;
       height: 64px;
-      background: rgba(8, 8, 8, .9);
+      height: 64px;
+      background: rgba(13, 27, 42, .95);
       border-bottom: 1px solid var(--border);
       backdrop-filter: blur(16px);
       position: sticky;
@@ -382,7 +384,7 @@
     .btn-logout:hover {
       border-color: rgba(200, 16, 46, .4);
       color: var(--red);
-      background: rgba(200, 16, 46, .06)
+      background: rgba(255, 255, 255, .1)
     }
 
     .user-tag {
@@ -495,8 +497,8 @@
     }
 
     .stat-card.red {
-      border-color: rgba(200, 16, 46, .25);
-      background: rgba(200, 16, 46, .05)
+      border-color: rgba(255, 255, 255, .25);
+      background: rgba(255, 255, 255, .05)
     }
 
     .stat-card.red::before {
@@ -533,7 +535,7 @@
     }
 
     .stat-card.red .stat-value {
-      color: #E8192F
+      color: #ffffff
     }
 
     .stat-card.green .stat-value {
@@ -591,7 +593,7 @@
 
     .search-wrap input:focus {
       border-color: rgba(200, 16, 46, .5);
-      box-shadow: 0 0 0 3px rgba(200, 16, 46, .1)
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, .1)
     }
 
     .search-wrap input::placeholder {
@@ -1177,10 +1179,10 @@
   <div class="login-screen" id="login-screen">
     <div class="login-card">
       <div class="login-logo">
-        <img src="brand-superbet-light.svg" alt="Superbet" />
+        <img src="header_logo.svg" alt="Novibet" style="height:32px" />
       </div>
       <div class="login-logo-badge">
-        <span class="badge">25</span>
+        <span class="badge">20</span>
         <span style="font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase">Dashboard
           Admin</span>
       </div>
@@ -1214,8 +1216,8 @@
     <header class="topbar">
       <div class="logo">
         <div class="dot"></div>
-        SUPER<span style="color:var(--red)">BET</span>
-        <div class="logo-badge">25</div>
+        <img src="header_logo.svg" alt="Novibet" style="height:24px" />
+        <div class="logo-badge">20</div>
         <span
           style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--muted);margin-left:4px">DASHBOARD</span>
       </div>
@@ -1259,7 +1261,7 @@
           <div class="stat-card blue">
             <div class="stat-label">Bônus Liberado</div>
             <div class="stat-value" id="stat-bonus">—</div>
-            <div class="stat-sub">R$25 × total leads</div>
+            <div class="stat-sub">R$20 × total leads</div>
             <div class="stat-icon">💰</div>
           </div>
         </div>
@@ -1391,8 +1393,8 @@
     var sb = null;
     try {
       sb = supabase.createClient(
-        'https://xuykymqkoinksmkhljrm.supabase.co',
-        'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs',
+        'https://kurbzeeruouuutlwwpte.supabase.co',
+        'sb_publishable_bhQMYMiR-gDS6OlC2iarEw_c-ocySQ_',
         {
           auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
           db: { schema: 'public' }
@@ -1477,7 +1479,7 @@
       animNum('stat-total', total);
       animNum('stat-today', today);
       animNum('stat-week', week);
-      document.getElementById('stat-bonus').textContent = 'R$' + (total * 25).toLocaleString('pt-BR');
+      document.getElementById('stat-bonus').textContent = 'R$' + (total * 20).toLocaleString('pt-BR');
     }
 
     function animNum(id, target) {
@@ -1582,7 +1584,7 @@
         + '<div class="modal-field"><label>WhatsApp</label><div class="val">' + esc(l.whatsapp || '—') + '</div></div>'
         + '<div class="modal-field"><label>Chave PIX</label><div class="val">' + esc(l.pix || '—') + '</div></div>'
         + '</div>'
-        + '<div class="modal-field"><label>Origem</label><div class="val">' + esc(l.origem || 'superbet25-pwa') + '</div></div>'
+        + '<div class="modal-field"><label>Origem</label><div class="val">' + esc(l.origem || 'novibet-pwa') + '</div></div>'
         + '<div class="modal-field"><label>Criado em</label><div class="val">' + d.toLocaleString('pt-BR') + '</div></div>'
         + '<div class="modal-field"><label>Status</label>'
         + '<select class="filter-select" style="width:100%" onchange="changeStatus(\'' + l.id + '\',this.value)">'
@@ -1636,13 +1638,13 @@
         var d = new Date(l.created_at);
         rows.push([i + 1, l.nome, l.sobrenome, l.whatsapp, l.pix,
         d.toLocaleDateString('pt-BR'), d.toLocaleTimeString('pt-BR'),
-        l.status || 'Novo', l.origem || 'superbet25-pwa'
+        l.status || 'Novo', l.origem || 'novibet-pwa'
         ].map(function (v) { return '"' + String(v || '').replace(/"/g, '""') + '"'; }).join(','));
       }
       var blob = new Blob(['\uFEFF' + head.join(',') + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8' });
       var a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'superbet25_leads_' + new Date().toISOString().slice(0, 10) + '.csv';
+      a.download = 'novibet_leads_' + new Date().toISOString().slice(0, 10) + '.csv';
       a.click();
       toast('CSV exportado com ' + allLeads.length + ' leads!', 'success');
     }

@@ -1,6 +1,8 @@
 -- =============================================
--- SUPERBET25 — Cole isso no SQL Editor do Supabase
--- https://xuykymqkoinksmkhljrm.supabase.co
+-- 🚨 INSTRUÇÃO OBRIGATÓRIA 🚨
+-- 1. Acesse: https://supabase.com/dashboard/project/kurbzeeruouuutlwwpte/sql
+-- 2. Clique em "New Query"
+-- 3. Cole TODO este conteúdo e clique em "Run"
 -- =============================================
 
 -- 1. Criar tabela de leads
@@ -11,7 +13,7 @@ CREATE TABLE IF NOT EXISTS leads (
   whatsapp   text NOT NULL,
   pix        text NOT NULL,
   status     text DEFAULT 'Novo',
-  origem     text DEFAULT 'superbet25-pwa',
+  origem     text DEFAULT 'novibet-pwa',
   created_at timestamptz DEFAULT now()
 );
 

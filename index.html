@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#C8102E" />
+  <meta name="theme-color" content="#BD2426" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Superbet25" />
-  <meta name="description" content="Cadastre-se e ganhe R$25 para jogar." />
+  <meta name="apple-mobile-web-app-title" content="Novibet" />
+  <meta name="description" content="Cadastre-se e ganhe R$20 para jogar." />
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
-  <title>Superbet25 — Ganhe R$25</title>
+  <title>Novibet — Ganhe R$20</title>
   <style>
     *,
     *::before,
@@ -24,10 +24,11 @@
     }
 
     :root {
-      --red: #C8102E;
-      --red-d: #9B0B22;
-      --bg: #0a0a0a;
-      --border: rgba(255, 255, 255, .08)
+      --red: #ffffff;
+      --red-d: #e0e0e0;
+      --bg: #0d1b2a;
+      --border: rgba(255, 255, 255, .1);
+      --surface: #1b263b;
     }
 
     body {
@@ -44,7 +45,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200, 16, 46, .22) 0%, transparent 70%)
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(13, 27, 42, 1) 0%, transparent 70%)
     }
 
     body::after {
@@ -77,12 +78,13 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10, 10, 10, .85)
+      background: rgba(13, 27, 42, .95)
     }
 
     .logo-img {
-      height: 22px;
-      width: auto
+      height: 28px;
+      width: auto;
+      display: block;
     }
 
     .logo-badge-wrap {
@@ -93,6 +95,7 @@
 
     .logo-badge {
       background: var(--red);
+      color: var(--bg);
       font-family: 'Rajdhani', sans-serif;
       font-size: 11px;
       font-weight: 700;
@@ -121,7 +124,7 @@
     .tabs {
       display: flex;
       border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 10, .6);
+      background: rgba(13, 27, 42, .8);
       backdrop-filter: blur(10px);
       position: sticky;
       top: 55px;
@@ -268,9 +271,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      border: 1px solid rgba(200, 16, 46, .4);
-      background: rgba(200, 16, 46, .08);
-      color: #ff6b7a;
+      border: 1px solid rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .08);
+      color: #ffffff;
       font-size: 12px;
       font-weight: 600;
       padding: 6px 14px;
@@ -304,12 +307,13 @@
     /* REWARD */
     .reward-card {
       margin: 0 24px 24px;
-      background: linear-gradient(135deg, var(--red-d) 0%, var(--red) 60%, #ff3a52 100%);
+      background: #ffffff;
       border-radius: 20px;
       padding: 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(200, 16, 46, .4)
+      box-shadow: 0 20px 60px rgba(255, 255, 255, .15);
+      color: var(--bg);
     }
 
     .reward-card::before {
@@ -319,7 +323,8 @@
       right: -40px;
       width: 160px;
       height: 160px;
-      background: rgba(255, 255, 255, .08);
+      height: 160px;
+      background: rgba(13, 27, 42, .05);
       border-radius: 50%
     }
 
@@ -421,16 +426,12 @@
 
     .field input {
       width: 100%;
-      background: rgba(255, 255, 255, .05);
-      border: 1.5px solid rgba(255, 255, 255, .10);
-      border-radius: 12px;
-      padding: 14px 16px 14px 42px;
-      color: #fff;
       font-family: 'Rajdhani', sans-serif;
       font-size: 16px;
       font-weight: 500;
       transition: all .2s;
-      outline: none
+      outline: none;
+      background: var(--surface);
     }
 
     .field input::placeholder {
@@ -469,8 +470,8 @@
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      background: rgba(200, 16, 46, .06);
-      border: 1px solid rgba(200, 16, 46, .2);
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 12px;
       padding: 14px;
       margin-bottom: 22px;
@@ -497,7 +498,8 @@
 
     .terms-check.checked .check-box {
       background: var(--red);
-      border-color: var(--red)
+      border-color: var(--red);
+      color: var(--bg)
     }
 
     .check-box svg {
@@ -523,14 +525,17 @@
     .btn-submit {
       width: 100%;
       padding: 18px;
-      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
+      padding: 18px;
+      background: #ffffff;
       border: none;
       border-radius: 14px;
       cursor: pointer;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       letter-spacing: 3px;
-      color: #fff;
+      letter-spacing: 3px;
+      color: var(--bg);
+      font-weight: 700;
       position: relative;
       overflow: hidden;
       transition: transform .15s, box-shadow .15s;
@@ -539,7 +544,7 @@
 
     .btn-submit:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 40px rgba(200, 16, 46, .55)
+      box-shadow: 0 12px 40px rgba(255, 255, 255, .3)
     }
 
     .btn-submit:active {
@@ -568,7 +573,7 @@
       width: 20px;
       height: 20px;
       border: 2px solid rgba(255, 255, 255, .3);
-      border-top-color: #fff;
+      border-top-color: var(--bg);
       border-radius: 50%;
       animation: spin .7s linear infinite;
       margin: 0 auto
@@ -578,8 +583,8 @@
       display: none
     }
 
-    .btn-submit.loading .spinner {
-      display: block
+    .logo-img {
+      height: 32px;
     }
 
     @keyframes spin {
@@ -637,7 +642,6 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       color: rgba(255, 255, 255, .5);
-      text-align: center;
       white-space: nowrap
     }
 
@@ -647,7 +651,7 @@
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: rgba(10, 10, 10, .97);
+      background: rgba(13, 27, 42, .98);
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -684,6 +688,10 @@
       }
     }
 
+    .logo-header img {
+      height: 28px;
+    }
+
     .success-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 44px;
@@ -700,15 +708,16 @@
 
     .btn-ok {
       padding: 16px 48px;
-      background: linear-gradient(135deg, var(--red) 0%, #ff2040 100%);
+      background: #ffffff;
       border: none;
       border-radius: 12px;
       cursor: pointer;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       letter-spacing: 2.5px;
-      color: #fff;
-      box-shadow: 0 8px 32px rgba(200, 16, 46, .45)
+      color: var(--bg);
+      font-weight: 700;
+      box-shadow: 0 8px 32px rgba(255, 255, 255, .3)
     }
 
     /* TUTORIAL */
@@ -928,8 +937,9 @@
     <!-- HEADER com logo oficial -->
     <header>
       <div class="logo-badge-wrap">
-        <img src="brand-superbet-light.svg" alt="Superbet" class="logo-img" />
-        <div class="logo-badge">25</div>
+        <a href="#" class="logo-link">
+          <img src="header_logo.svg" alt="Novibet" class="logo-img" />
+        </a>
       </div>
       <div class="header-right">
         <div class="header-pill">Plataforma Oficial</div>
@@ -949,14 +959,14 @@
       <!-- PROMO BANNERS CAROUSEL -->
       <div class="promo-section">
         <div class="promo-carousel" id="promo-carousel">
-          <div class="promo-slide" onclick="goToCreateAccount()">
-            <img src="25-10-06 - PlaybookFifaBreak_1_v3 (12).png" alt="Playbook Carnaval" />
+          <div class="promo-slide" onclick="window.open(NOVIBET_LINK, '_blank')">
+            <img src="img/banner-1.png" alt="Promo 1" />
           </div>
-          <div class="promo-slide" onclick="goToCreateAccount()">
-            <img src="25-10-23 - SUPERScddUB_SO_v3.png" alt="SuperOdds" />
+          <div class="promo-slide" onclick="window.open(NOVIBET_LINK, '_blank')">
+            <img src="img/banner-2.png" alt="Promo 2" />
           </div>
-          <div class="promo-slide" onclick="goToCreateAccount()">
-            <img src="25-12-30 - CASHBACK_SLOT_JANEIRO_v3 (2).png" alt="Cashback Diário" />
+          <div class="promo-slide" onclick="window.open(NOVIBET_LINK, '_blank')">
+            <img src="img/promo-3.png" alt="Promo 3" />
           </div>
         </div>
         <div class="promo-dots" id="promo-dots"></div>
@@ -970,7 +980,7 @@
 
       <div class="reward-card">
         <div class="reward-label">SEU BÔNUS DE BOAS-VINDAS</div>
-        <div class="reward-amount"><sup>R$</sup>25</div>
+        <div class="reward-amount"><sup>R$</sup>20</div>
         <div class="reward-desc">Para jogar na plataforma após cadastro</div>
         <div class="reward-icon">🏆</div>
       </div>
@@ -978,8 +988,8 @@
       <!-- QUICK LINKS -->
       <div class="quick-links">
         <a class="quick-link" onclick="goToCreateAccount()">
-          <img src="quick_links_superspin (1).png" alt="SuperSpin" />
-          <span>SuperSpin</span>
+          <img src="quick_links_novispin.png" alt="NoviSpin" />
+          <span>NoviSpin</span>
         </a>
         <a class="quick-link" onclick="goToCreateAccount()">
           <span style="font-size:28px;line-height:1">⚽</span>
@@ -1041,10 +1051,10 @@
             </svg>
           </div>
           <div class="terms-text">Li e aceito os <strong>Termos de Uso</strong>. Estou ciente que devo cumprir as regras
-            para receber <strong>R$25</strong>.</div>
+            para receber <strong>R$20</strong>.</div>
         </div>
         <button class="btn-submit" id="btn-submit" onclick="submitForm()">
-          <div class="btn-text">🚀 QUERO MEU BÔNUS DE R$25</div>
+          <div class="btn-text">🚀 QUERO MEU BÔNUS DE R$20</div>
           <div class="spinner"></div>
         </button>
       </div>
@@ -1065,12 +1075,12 @@
         <h2>TERMOS DE USO</h2>
         <p class="subtitle">Última atualização: Janeiro 2025</p>
         <div class="terms-highlight">
-          <p>🎯 Ao se cadastrar, você concorda com todos os termos abaixo e tem direito a receber <strong>R$25</strong>
+          <p>🎯 Ao se cadastrar, você concorda com todos os termos abaixo e tem direito a receber <strong>R$20</strong>
             para jogar após cumprir as regras.</p>
         </div>
         <div class="terms-section">
-          <h3>1. O Bônus de R$25</h3>
-          <p>Ao realizar seu cadastro completo e válido, você receberá <strong>R$25</strong> de bônus. O valor será
+          <h3>1. O Bônus de R$20</h3>
+          <p>Ao realizar seu cadastro completo e válido, você receberá <strong>R$20</strong> de bônus. O valor será
             creditado após verificação dos seus dados.</p>
         </div>
         <div class="terms-section">
@@ -1088,7 +1098,7 @@
           <ul>
             <li>O usuário deve ter no mínimo 18 anos.</li>
             <li>Proibido criar múltiplas contas.</li>
-            <li>A Superbet25 pode cancelar o bônus em caso de fraude.</li>
+            <li>A Novibet pode cancelar o bônus em caso de fraude.</li>
             <li>O bônus não é transferível nem sacável diretamente.</li>
           </ul>
         </div>
@@ -1098,7 +1108,7 @@
         </div>
         <div class="terms-highlight" style="margin-top:28px">
           <p>✅ Ao aceitar, você confirma que leu e concorda com todas as regras para receber seu bônus de
-            <strong>R$25</strong>.
+            <strong>R$20</strong>.
           </p>
         </div>
       </div>
@@ -1109,7 +1119,7 @@
   <div class="success-overlay" id="success-overlay">
     <div class="success-icon">🎉</div>
     <h2 class="success-title">CADASTRO REALIZADO!</h2>
-    <p class="success-sub">Parabéns! Seus dados foram salvos com sucesso.<br><strong style="color:#ff8090">R$25</strong>
+    <p class="success-sub">Parabéns! Seus dados foram salvos com sucesso.<br><strong style="color:#ff8090">R$20</strong>
       serão liberados após verificação.<br><br>Fique atento ao seu WhatsApp!</p>
     <button class="btn-ok" onclick="goToCreateAccount()"
       style="font-size:20px;padding:18px 40px;letter-spacing:2.5px">🚀 CRIAR MINHA CONTA</button>
@@ -1156,7 +1166,7 @@
 
   <div class="install-bar" id="install-bar">
     <span style="font-size:28px">📲</span>
-    <div class="install-text"><strong>Instalar Superbet25</strong><span>Acesse mais rápido pelo celular</span></div>
+    <div class="install-text"><strong>Instalar Novibet</strong><span>Acesse mais rápido pelo celular</span></div>
     <button class="btn-install" id="btn-install">Instalar</button>
     <button class="btn-install-close" onclick="closeInstall()">✕</button>
   </div>
@@ -1169,8 +1179,8 @@
     var sb = null;
     try {
       sb = supabase.createClient(
-        'https://xuykymqkoinksmkhljrm.supabase.co',
-        'sb_publishable_RhS3MyV1wu2fFbe1is04Fg_4lWGWfKs'
+        'https://kurbzeeruouuutlwwpte.supabase.co',
+        'sb_publishable_bhQMYMiR-gDS6OlC2iarEw_c-ocySQ_'
       );
     } catch (e) { console.error('Supabase init error:', e); }
 
@@ -1294,7 +1304,7 @@
           whatsapp: document.getElementById('whatsapp').value.trim(),
           pix: document.getElementById('pix').value.trim(),
           status: 'Novo',
-          origem: 'superbet25-pwa'
+          origem: 'novibet-pwa'
         }]);
         btn.classList.remove('loading'); btn.disabled = false;
         if (result.error) { console.error(result.error); showAlert('⚠️ Erro ao salvar. Tente novamente.'); return; }
@@ -1310,9 +1320,9 @@
 
     function closeSuccess() { document.getElementById('success-overlay').classList.remove('show'); }
 
-    var SUPERBET_LINK = 'https://wlsuperbet.adsrv.eacdn.com/C.ashx?btag=a_20689b_431c_&affid=662&siteid=20689&adid=431&c=MarcosAntonio';
+    var NOVIBET_LINK = 'https://rt.novibet.partners/o/kyZb25?lpage=HPWYNJ&site_id=1023316&s1=Edilton1_MarcoAntonio';
     function goToCreateAccount() {
-      window.open(SUPERBET_LINK, '_blank');
+      window.open(NOVIBET_LINK, '_blank');
       closeSuccess();
     }
 
@@ -1320,9 +1330,9 @@
     //  VIDEOS — Tutoriais locais (MP4)
     // ══════════════════════════════════════════
     var videos = [
-      { num: 'Tutorial 1', title: 'Como usar seu bônus de 25', desc: 'Aprenda o passo a passo para garantir o bônus.', src: '1.mp4' },
-      { num: 'Tutorial 2', title: 'Faturando com o Bônus', desc: 'Veja como ativar o bônus.', src: '2.mp4' },
-      { num: 'Tutorial 3', title: 'Usando seu Bônus de R$25', desc: 'Entenda como utilizar seus R$25 e começar a jogar.', src: '3.mp4' }
+      { num: 'Tutorial 1', title: 'Como usar seu bônus de 20', desc: 'Aprenda o passo a passo para garantir o bônus.', src: 'videos/tutorial-1.mp4' },
+      { num: 'Tutorial 2', title: 'Faturando com o Bônus', desc: 'Veja como ativar o bônus.', src: 'videos/tutorial-2.mp4' },
+      { num: 'Tutorial 3', title: 'Usando seu Bônus de R$20', desc: 'Entenda como utilizar seus R$20 e começar a jogar.', src: 'videos/tutorial-3.mp4' }
     ];
     var vhtml = '';
     for (var i = 0; i < videos.length; i++) {

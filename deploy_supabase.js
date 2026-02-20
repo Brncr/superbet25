@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ═══════════════════════════════════════════════════════
-//  SUPERBET25 — Deploy Automático do Supabase
+//  NOVIBET — Deploy Automático do Supabase
 //  Roda: node deploy_supabase.js
 //  Cria tabela, políticas RLS e realtime automaticamente
 // ═══════════════════════════════════════════════════════
@@ -8,10 +8,10 @@
 const https = require('https');
 
 // ── CONFIG (via variáveis de ambiente ou .env) ─────────
-const PROJECT_REF = process.env.SUPABASE_PROJECT_REF || 'xuykymqkoinksmkhljrm';
+const PROJECT_REF = 'kurbzeeruouuutlwwpte';
 const SUPABASE_URL = `https://${PROJECT_REF}.supabase.co`;
-const ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const ANON_KEY = 'sb_publishable_bhQMYMiR-gDS6OlC2iarEw_c-ocySQ_';
+const SERVICE_ROLE_KEY = 'sb_secret_N1qN6Kqkt_-47MzTSgS9Aw_5BLFH6uw';
 
 if (!SERVICE_ROLE_KEY) {
     console.error('ERRO: Defina a variavel SUPABASE_SERVICE_ROLE_KEY');
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS leads (
   whatsapp   text NOT NULL,
   pix        text NOT NULL,
   status     text DEFAULT 'Novo',
-  origem     text DEFAULT 'superbet25-pwa',
+  origem     text DEFAULT 'novibet-pwa',
   created_at timestamptz DEFAULT now()
 );
 
@@ -142,7 +142,7 @@ async function deploy() {
     const log = console.log;
     log('');
     log('======================================================');
-    log('  SUPERBET25 - Deploy Automatico Supabase');
+    log('  NOVIBET - Deploy Automatico Supabase');
     log('======================================================');
     log('');
 
@@ -215,7 +215,7 @@ async function deploy() {
 
     log('');
     log('URLs do projeto:');
-    log('  Frontend: https://superbet25.vercel.app');
+    log('  Frontend: https://novibet-pwa.vercel.app');
     log('  Backend:  ' + SUPABASE_URL);
     log('  Dash SQL: https://supabase.com/dashboard/project/' + PROJECT_REF + '/sql');
     log('');
