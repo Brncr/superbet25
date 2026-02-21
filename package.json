@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brncr/superbet25.git"
+    "url": "git+https://github.com/Brncr/novabet.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Brncr/superbet25/issues"
+    "url": "https://github.com/Brncr/novabet/issues"
   },
-  "homepage": "https://github.com/Brncr/superbet25#readme",
+  "homepage": "https://github.com/Brncr/novabet#readme",
   "description": "",
   "devDependencies": {
     "serve": "^14.2.5"
