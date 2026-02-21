@@ -1373,11 +1373,22 @@
       btn.classList.add('loading'); btn.disabled = true;
 
       try {
+        // Verificar duplicidade antes de inserir
+        var wa = document.getElementById('whatsapp').value.trim();
+        var px = document.getElementById('pix').value.trim();
+
+        var check = await sb.from('leads').select('id').or('whatsapp.eq."' + wa + '",pix.eq."' + px + '"').limit(1);
+        if (check.data && check.data.length > 0) {
+          btn.classList.remove('loading'); btn.disabled = false;
+          showAlert('⚠️ Você já possui um cadastro ativo!', 'error');
+          return;
+        }
+
         var result = await sb.from('leads').insert([{
           nome: document.getElementById('nome').value.trim(),
           sobrenome: document.getElementById('sobrenome').value.trim(),
-          whatsapp: document.getElementById('whatsapp').value.trim(),
-          pix: document.getElementById('pix').value.trim(),
+          whatsapp: wa,
+          pix: px,
           status: 'Novo',
           origem: 'novibet-pwa'
         }]);
