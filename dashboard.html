@@ -1479,7 +1479,7 @@
     async function loadLeads() {
       if (!sb) return;
       console.log('🔄 Fetching leads...');
-      var result = await sb.from('leads').select('*').order('created_at', { ascending: false }).limit(100);
+      var result = await sb.from('leads').select('*').order('created_at', { ascending: false });
       console.log('📡 Leads fetch result:', result);
       if (result.error) {
         console.error(result.error);
