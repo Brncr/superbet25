@@ -805,6 +805,12 @@
       border: 1px solid rgba(245, 158, 11, .25)
     }
 
+    .status-pending {
+      background: rgba(59, 130, 246, .12);
+      color: var(--blue);
+      border: 1px solid rgba(59, 130, 246, .25)
+    }
+
     .row-actions {
       display: flex;
       gap: 6px;
@@ -1283,6 +1289,7 @@
             <option value="">Todos os status</option>
             <option value="Novo">Novo</option>
             <option value="Verificado">Verificado</option>
+            <option value="Pendente">Pendente</option>
             <option value="Reserva">Reserva (Nova Casa)</option>
             <option value="Reservado p/ outra casa">Reservado p/ outra casa</option>
           </select>
@@ -1618,6 +1625,7 @@
         var status = l.status || 'Novo';
         var stClass = 'status-new';
         if (status === 'Verificado') stClass = 'status-ok';
+        else if (status === 'Pendente') stClass = 'status-pending';
         else if (status === 'Reserva' || status === 'Reservado p/ outra casa') stClass = 'status-waiting';
         var globalIdx = allLeads.indexOf(l) + 1;
 
@@ -1694,6 +1702,7 @@
         + '<select class="filter-select" style="width:100%" onchange="changeStatus(\'' + l.id + '\',this.value)">'
         + '<option ' + ((l.status || 'Novo') === 'Novo' ? 'selected' : '') + '>Novo</option>'
         + '<option ' + (l.status === 'Verificado' ? 'selected' : '') + '>Verificado</option>'
+        + '<option ' + (l.status === 'Pendente' ? 'selected' : '') + '>Pendente</option>'
         + '<option ' + (l.status === 'Reserva' ? 'selected' : '') + '>Reserva</option>'
         + '<option ' + (l.status === 'Reservado p/ outra casa' ? 'selected' : '') + '>Reservado p/ outra casa</option>'
         + '</select></div>'
