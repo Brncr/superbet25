@@ -1455,7 +1455,7 @@
       // Find all unique houses from leads
       for (var i = 0; i < allLeads.length; i++) {
         var h = allLeads[i].cpa_house;
-        if (h && h.trim() !== '' && knownHouses.indexOf(h) === -1) {
+        if (h && h.trim() !== '' && h !== 'Novibet' && knownHouses.indexOf(h) === -1) {
           knownHouses.push(h);
         }
       }
@@ -1528,25 +1528,40 @@
     // ── STATS ──
     function updateStats() {
       var now = new Date();
-      var todayStr = now.toDateString();
-      var weekAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
+      // Use YYYY-MM-DD for stable date comparison
+      var todayStr = now.toISOString().split('T')[0];
+      var weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
       var total = allLeads.length;
-      var today = allLeads.filter(function (l) { return new Date(l.created_at).toDateString() === todayStr; }).length;
-      var week = allLeads.filter(function (l) { return new Date(l.created_at) >= weekAgo; }).length;
+      var today = 0;
+      var week = 0;
+
+      for (var i = 0; i < allLeads.length; i++) {
+        var l = allLeads[i];
+        var d = new Date(l.created_at);
+        if (d.toISOString().split('T')[0] === todayStr) today++;
+        if (d >= weekAgo) week++;
+      }
+
       animNum('stat-total', total);
       animNum('stat-today', today);
       animNum('stat-week', week);
-      animNum('stat-week', week);
-      document.getElementById('stat-bonus').textContent = 'R$' + (total * 20).toLocaleString('pt-BR');
+
+      // Update currency fields directly (animations on currencies with R$ prefix cause "cur = NaN")
+      document.getElementById('stat-bonus').textContent = 'R$ ' + (total * 20).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
       var profit = calculateTotalProfit();
       document.getElementById('stat-profit').textContent = 'R$ ' + profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
-      // Reserve leads are those that are in Reserva/Reservado statuses OR have a house but are not yet Verificado
-      var reserveLeads = allLeads.filter(function (l) {
-        return l.status === 'Reserva' || l.status === 'Reservado p/ outra casa' || (l.cpa_house && l.status !== 'Verificado');
-      });
-      var reserveCount = reserveLeads.length;
+      // Reserve leads: 'Reserva' OR (has house but NOT qualified yet)
+      var reserveCount = 0;
+      for (var i = 0; i < allLeads.length; i++) {
+        var l = allLeads[i];
+        // Now 'Reservado p/ outra casa' is counted in profit, so we exclude it from reserveCount to avoid double counting
+        if (l.status === 'Reserva' || (l.cpa_house && l.status !== 'Verificado' && l.status !== 'Reservado p/ outra casa')) {
+          reserveCount++;
+        }
+      }
       document.getElementById('stat-potential').textContent = 'R$ ' + (reserveCount * 150).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     }
 
@@ -1820,8 +1835,8 @@
       var sum = 0;
       for (var i = 0; i < allLeads.length; i++) {
         var l = allLeads[i];
-        // Only count profit if status is Verificado
-        if (l.cpa_house && l.status === 'Verificado') {
+        // Count profit if status is Verificado OR Reservado p/ outra casa (since it's a qualified lead)
+        if (l.cpa_house && (l.status === 'Verificado' || l.status === 'Reservado p/ outra casa')) {
           sum += (parseFloat(l.cpa_value) || 150);
         }
       }
