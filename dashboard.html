@@ -1284,6 +1284,7 @@
             <option value="Novo">Novo</option>
             <option value="Verificado">Verificado</option>
             <option value="Reserva">Reserva (Nova Casa)</option>
+            <option value="Reservado p/ outra casa">Reservado p/ outra casa</option>
           </select>
           <select class="filter-select" id="filter-house" onchange="filterAndRender()">
             <option value="">Todas as Casas</option>
@@ -1541,8 +1542,12 @@
       var profit = calculateTotalProfit();
       document.getElementById('stat-profit').textContent = 'R$ ' + profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
-      var reserve = allLeads.filter(function (l) { return l.status === 'Reserva' || (l.status === 'Verificado' && l.cpa_house); }).length;
-      document.getElementById('stat-potential').textContent = 'R$ ' + (reserve * 150).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      // Reserve leads are those that are in Reserva/Reservado statuses OR have a house but are not yet Verificado
+      var reserveLeads = allLeads.filter(function (l) {
+        return l.status === 'Reserva' || l.status === 'Reservado p/ outra casa' || (l.cpa_house && l.status !== 'Verificado');
+      });
+      var reserveCount = reserveLeads.length;
+      document.getElementById('stat-potential').textContent = 'R$ ' + (reserveCount * 150).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     }
 
     function animNum(id, target) {
@@ -1598,7 +1603,7 @@
         var status = l.status || 'Novo';
         var stClass = 'status-new';
         if (status === 'Verificado') stClass = 'status-ok';
-        else if (status === 'Reserva') stClass = 'status-waiting';
+        else if (status === 'Reserva' || status === 'Reservado p/ outra casa') stClass = 'status-waiting';
         var globalIdx = allLeads.indexOf(l) + 1;
 
         // CPA Logic
@@ -1668,17 +1673,37 @@
         + '</div>'
         + '<div class="modal-field"><label>Origem</label><div class="val">' + esc(l.origem || 'novibet-pwa') + '</div></div>'
         + '<div class="modal-field"><label>Criado em</label><div class="val">' + d.toLocaleString('pt-BR') + '</div></div>'
+        + '<div class="modal-field"><label>Anotações</label>'
+        + '<textarea class="filter-select" style="width:100%;min-height:80px;padding:10px;font-family:inherit" placeholder="Adicione um comentário..." onblur="saveNotes(\'' + l.id + '\',this.value)">' + esc(l.notes || '') + '</textarea></div>'
         + '<div class="modal-field"><label>Status</label>'
         + '<select class="filter-select" style="width:100%" onchange="changeStatus(\'' + l.id + '\',this.value)">'
         + '<option ' + ((l.status || 'Novo') === 'Novo' ? 'selected' : '') + '>Novo</option>'
         + '<option ' + (l.status === 'Verificado' ? 'selected' : '') + '>Verificado</option>'
         + '<option ' + (l.status === 'Reserva' ? 'selected' : '') + '>Reserva</option>'
+        + '<option ' + (l.status === 'Reservado p/ outra casa' ? 'selected' : '') + '>Reservado p/ outra casa</option>'
         + '</select></div>'
         + '<div style="display:flex;gap:8px;margin-top:20px">'
         + '<button class="btn btn-primary" style="flex:1" onclick="copyText(\'' + esc(l.whatsapp || '') + '\',\'WhatsApp\')">📋 Copiar WhatsApp</button>'
         + '<button class="btn btn-ghost" style="flex:1" onclick="copyText(\'' + esc(l.pix || '') + '\',\'PIX\')">📋 Copiar PIX</button>'
         + '</div>';
       document.getElementById('modal-bg').classList.add('open');
+    }
+
+    async function saveNotes(id, val) {
+      if (!sb) return;
+      var l = allLeads.find(function (x) { return x.id === id; });
+      if (l && l.notes === val) return;
+      var result = await sb.from('leads').update({ notes: val }).eq('id', id);
+      if (result.error) {
+        if (result.error.message.indexOf('column \"notes\" of relation \"leads\" does not exist') >= 0 || result.error.message.indexOf('notes') >= 0) {
+          toast('Erro: Coluna "notes" não encontrada. Execute o SQL de atualização.', 'error');
+        } else {
+          toast('Erro ao salvar anotação: ' + result.error.message, 'error');
+        }
+        return;
+      }
+      if (l) l.notes = val;
+      toast('Anotação salva!', 'success');
     }
 
     function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
@@ -1794,8 +1819,10 @@
     function calculateTotalProfit() {
       var sum = 0;
       for (var i = 0; i < allLeads.length; i++) {
-        if (allLeads[i].cpa_house) {
-          sum += (parseFloat(allLeads[i].cpa_value) || 150);
+        var l = allLeads[i];
+        // Only count profit if status is Verificado
+        if (l.cpa_house && l.status === 'Verificado') {
+          sum += (parseFloat(l.cpa_value) || 150);
         }
       }
       return sum;

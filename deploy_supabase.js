@@ -66,6 +66,9 @@ END $$;
 -- CPA Tracking
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS cpa_house text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS cpa_value numeric DEFAULT 150.00;
+
+-- Comments
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS notes text;
 `;
 
 // ── HTTP HELPER ─────────────────────────────────────────
